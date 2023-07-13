@@ -1,0 +1,24 @@
+buildType:
+      default: debug 
+      choices:
+        debug:
+          short: debug
+          long: Emit debug information
+          buildType: Debug
+        release:
+          short: release
+          long: Optimize generated code
+          buildType: Release
+bootDisk:
+      default: ram
+      choices:
+        ram:
+          short: ram
+          long: ram
+          settings:
+           bootDisk: "Ram"
+        flash:
+          short: flash
+          long: flash
+          settings:
+           bootDisk: Flash

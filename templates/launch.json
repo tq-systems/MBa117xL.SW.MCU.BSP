@@ -1,0 +1,85 @@
+{
+  "inputs": [
+    {
+      "type": "pickString",
+      "id": "app",
+      "description": "choose your app",
+      "options": [
+        "demo_hello_world",
+        "demo_gpio_led",
+        "demo_flexcan",
+        "demo_digital_io",
+        "demo_afe",
+        "demo_rs485",
+        "demo_sdcard",
+        "demo_RTC",
+        "demo_eeprom",
+        "demo_iot",
+        "demo_usb",
+        "demo_PMIC",
+        "demo_spi_flash",
+        "demo_SE97BTP",
+        "demo_ethernet"
+      ]
+    }
+  ],
+  "configurations": [
+    {
+      "showDevDebugOutput": "both",
+      "type": "cortex-debug",
+      "request": "launch",
+      "name": "Debug J-Link TQMa1176L",
+      "cwd": "${workspaceFolder}",
+      "servertype": "jlink",
+      "device": "MIMXRT1176xxxA_M7",
+      "interface": "jtag",
+      "executable": "${workspaceFolder}\\build\\boards\\TQMa1176L\\dist\\Debug\\Ram\\TQMa1176L_${input:app}.elf",
+      "serverArgs": [
+        "-select",
+        "USB",
+        "-ir",
+        "-select",
+        "USB",
+        "-endian",
+        "little",
+        "-LocalhostOnly",
+        "-speed",
+        "4000"
+      ],
+      "postLaunchCommands": [
+        "target remote localhost:50003",
+        "monitor reset",
+        "monitor halt",
+        "load"
+      ]
+    },
+    {
+      "showDevDebugOutput": "both",
+      "type": "cortex-debug",
+      "request": "launch",
+      "name": "Debug J-Link TQMa1176L-Nor-Flash",
+      "cwd": "${workspaceFolder}",
+      "servertype": "jlink",
+      "device": "MIMXRT1176xxxA_M7",
+      "interface": "jtag",
+      "executable": "${workspaceFolder}\\build\\boards\\TQMa1176L\\dist\\Debug\\Flash\\TQMa1176L_${input:app}.elf",
+      "serverArgs": [
+        "-select",
+        "USB",
+        "-ir",
+        "-select",
+        "USB",
+        "-endian",
+        "little",
+        "-LocalhostOnly",
+        "-speed",
+        "4000",
+        "-device",
+        "MIMXRT1176xxxA_M7?BankAddr=0x30000000&Loader=nCS@AD18_CLK@AD19_D0@AD20_D1@AD21_D2@AD22_D3@AD23&BankAddr=0x60000000&Loader=nCS@SDB100_CLK@SDB101_D0@SDB102_D1@SDB103_D2@SDB104_D3@SDB105"
+      ],
+      "postLaunchCommands": [
+        "monitor reset"
+      ]
+    }
+  ]
+}

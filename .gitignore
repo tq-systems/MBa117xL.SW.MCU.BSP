@@ -1,0 +1,6 @@
+# Ignore specified folders in any subdirectory
+build/
+.vscode/
+
+# ignore files of this types:
+version.h

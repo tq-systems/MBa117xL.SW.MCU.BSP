@@ -1,0 +1,44 @@
+/*! 
+ * \page TQMa1176L_Applications
+
+ * \subpage MBa117xL_Board
+
+ * \subpage demo_afe
+
+ * \subpage demo_digital_io
+
+ * \subpage demo_eeprom
+
+ * \subpage demo_ethernet
+
+ * \subpage demo_flexcan
+
+ * \subpage demo_gpio_led
+
+ * \subpage demo_hello_world
+
+ * \subpage demo_iot
+
+ * \subpage demo_PMIC
+
+ * \subpage demo_rs485
+
+ * \subpage demo_RTC
+
+ * \subpage demo_sdcard
+
+ * \subpage demo_SE97BTP
+
+ * \subpage demo_spi_flash
+
+ * \subpage demo_usb
+
+ */
+
+/*!
+ * \page Documentation
+ * \subpage templates
+
+ * \subpage license
+
+*/

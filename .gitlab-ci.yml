@@ -1,0 +1,21 @@
+
+image: "vgitlab01.tq-net.de:5005/tq-embedded/tqmaxx/toolchain-tqmaxx/bare:ubuntu-18.04"
+
+stages:
+  - build
+
+import_sdk_and_compile:
+  tags:
+    - docker
+    - tqmaxx
+  stage: build
+  before_script:
+    - echo "Importing and patching SDK"
+    - scripts/prepare.sh
+  script:
+    - echo "Building tagets"
+    - scripts/build.sh
+  artifacts:
+    when: on_success
+    paths:
+      - "*.tar.gz"

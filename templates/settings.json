@@ -1,0 +1,26 @@
+{
+    /* CMake configurations */
+    "cmake.configureOnOpen": false,
+    "cmake.preferredGenerators": [
+        "Ninja",
+        "Unix Makefiles",
+        "MinGW Makefiles"
+    ],
+    "cmake.environment": {
+        "ARMGCC_DIR": "C:\\Program Files (x86)\\Arm GNU Toolchain arm-none-eabi\\12.2 mpacbti-rel1\\"
+        //Under Linux: "ARMGCC_DIR": "/opt/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi",
+        //"MCUXSDK_ROOT": "C:\\nxp\\mcuxsdk" //can be used as alternative path for the sdk
+    },
+    "cmake.buildDirectory": "${sourceDirectory}/build",
+    "cmake.configureSettings": {
+        "CMAKE_TOOLCHAIN_FILE": "dependencies\\mcuxsdk\\core\\tools\\cmake_toolchain_files\\armgcc.cmake"
+    },
+    /* Debugger configurations */
+    "cortex-debug.gdbPath": "C:\\Program Files (x86)\\Arm GNU Toolchain arm-none-eabi\\12.2 mpacbti-rel1\\bin\\arm-none-eabi-gdb.exe",
+    "cortex-debug.armToolchainPath": "C:\\Program Files (x86)\\Arm GNU Toolchain arm-none-eabi\\12.2 mpacbti-rel1\\bin\\",
+    "cortex-debug.JLinkGDBServerPath": "C:\\Program Files\\SEGGER\\JLink\\JLinkGDBServerCL.exe",
+    "cortex-debug.variableUseNaturalFormat": true,
+    /*Styling configurations*/
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true
+}
