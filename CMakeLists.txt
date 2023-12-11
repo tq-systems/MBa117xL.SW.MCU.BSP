@@ -56,5 +56,6 @@ if(EXISTS "${CMAKE_SOURCE_DIR}/version.h" AND EXISTS ${MCUXSDK_ROOT}/patched.txt
 
     include(flags_macros)
     
+    set(BOARD_NAME "TQMa1176xL")
     add_subdirectory(examples)
 endif()
