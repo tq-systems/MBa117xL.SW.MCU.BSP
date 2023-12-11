@@ -13,7 +13,7 @@ FILE=${FILENAME}
 
 printf "generating version information header\r\n"
 
-VERSION=$(git describe --match "v*" --abbrev=0 --tags HEAD)
+VERSION=$(git describe --match "*BSP.*" --abbrev=0 --tags HEAD)
 BRANCH=$(git branch --show-current)
 
 rm -f ${FILE}
