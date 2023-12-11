@@ -8,7 +8,7 @@
 # from VCS
 #******************************************************************************
 
-FILENAME=../version.h
+FILENAME=version.h
 FILE=${FILENAME}
 
 printf "generating version information header\r\n"

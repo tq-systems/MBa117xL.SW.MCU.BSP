@@ -8,9 +8,9 @@ rem # Description: Script for generating version header based on information
 rem # from VCS
 rem #*************************************************************************
 
-set FILENAME=../version.h
+set FILENAME=version.h
 set FILE=%FILENAME%
-set TMP=%TEMP%\tmp_%FILENAME%
+set TMP=%TEMP%\%FILENAME%
 
 for /F "delims=v" %%i in ('"git describe --match "v*" --abbrev=0 --tags HEAD"') do set VERSION=%%i
 for /F %%i in ('git branch --show-current') do set BRANCH=%%i
