@@ -33,18 +33,20 @@ execute_process(
     COMMAND_ERROR_IS_FATAL LAST
 )
 
-if(WIN32)
-execute_process(
-    COMMAND cmd /c "generate_version.bat"
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/scripts
-    COMMAND_ERROR_IS_FATAL LAST
-)
-else(UNIX)
-execute_process(
-    COMMAND bash -c "${CMAKE_SOURCE_DIR}/scripts/generate_version.sh"
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/scripts
-    COMMAND_ERROR_IS_FATAL LAST
-)
+if(${CMAKE_HOST_SYSTEM_NAME} STREQUAL "Windows")
+    execute_process(
+        COMMAND cmd /c "${CMAKE_SOURCE_DIR}/scripts/generate_version.bat"
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        COMMAND_ERROR_IS_FATAL LAST
+    )
+elseif(${CMAKE_HOST_SYSTEM_NAME} STREQUAL "Linux")
+    execute_process(
+        COMMAND bash -c "${CMAKE_SOURCE_DIR}/scripts/generate_version.sh"
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        COMMAND_ERROR_IS_FATAL LAST
+    )
+else()
+    message(FATAL_ERROR "Host system was not recognized. HOST NAME: ${CMAKE_HOST_SYSTEM_NAME}")
 endif()
 
 if(EXISTS "${CMAKE_SOURCE_DIR}/version.h" AND EXISTS ${MCUXSDK_ROOT}/patched.txt)
