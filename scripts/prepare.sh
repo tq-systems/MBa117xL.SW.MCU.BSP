@@ -3,7 +3,8 @@
 # SPDX-License-Identifier: BSD-3-Clause
 # Copyright (c) 2021 - 2023 TQ-Systems GmbH <license@tq-group.com>,
 # D-82229 Seefeld, Germany.
-# Author:    Isaac Lucas de Lima Yuki
+# Author:    Isaac L. L. Yuki
+#
 # Description: Script for setting up the mcuxsdk.
 #******************************************************************************
 
