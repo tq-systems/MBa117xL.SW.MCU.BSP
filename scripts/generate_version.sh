@@ -4,16 +4,17 @@
 # Copyright (c) 2021 - 2023 TQ-Systems GmbH <license@tq-group.com>,
 # D-82229 Seefeld, Germany.
 # Author:    Maximilian Kürth
+#
 # Description: Script to generate version header based on information 
 # from VCS
 #******************************************************************************
 
-FILENAME=../version.h
+FILENAME=version.h
 FILE=${FILENAME}
 
 printf "generating version information header\r\n"
 
-VERSION=$(git describe --match "v*" --abbrev=0 --tags HEAD)
+VERSION=$(git describe --match "*BSP.*" --abbrev=0 --tags HEAD)
 BRANCH=$(git branch --show-current)
 
 rm -f ${FILE}

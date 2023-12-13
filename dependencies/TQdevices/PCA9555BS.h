@@ -6,6 +6,7 @@
  * Copyright (c) 2021 - 2023 TQ-Systems GmbH <license@tq-group.com>,
  * D-82229 Seefeld, Germany.
  * Author: Isaac L. L. Yuki
+ *
  * \brief Driver for the PCA9555BS port expander.
  */
 //******************************************************************************

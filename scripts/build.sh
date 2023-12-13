@@ -4,7 +4,8 @@
 # SPDX-License-Identifier: BSD-3-Clause
 # Copyright (c) 2021 - 2023 TQ-Systems GmbH <license@tq-group.com>,
 # D-82229 Seefeld, Germany.
-# Author:    Isaac Lucas de Lima Yuki
+# Author:    Isaac L. L. Yuki
+#
 # Description: Script for setting up the build system and building targets.
 # ******************************************************************************
 
@@ -49,6 +50,7 @@ main() {
 
 			$CMAKE -DCMAKE_TOOLCHAIN_FILE="${MCUXSDK_ROOT}/core/tools/cmake_toolchain_files/armgcc.cmake" \
 			      -DCMAKE_BUILD_TYPE="${type}" \
+				  -DDETAILED_COMPILER_WARNINGS=OFF \
 			      -DbootDisk="${target}" \
 			      -B "${build_dir}" \
 			      -G "${GENERATOR}" \
@@ -58,7 +60,10 @@ main() {
 			echo "Building ..."
 			$CMAKE --build "${build_dir}" --config ${type} --target all -j "$(nproc)"
 
-			tar -cvf ${PROJECT_NAME}-${target}-${type}.tar.gz -C ${build_dir}/boards/dist/${type}/ ${target} --use-compress-program=gzip
+			tar --create --verbose --file=${PROJECT_NAME}-${target}-${type}.tar.gz \
+				--use-compress-program=gzip \
+				--directory=${build_dir}/dist/${type}/ \
+				 ${target}
 		done
 	done
 	echo "Build completed ..."
