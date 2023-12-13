@@ -50,6 +50,7 @@ main() {
 
 			$CMAKE -DCMAKE_TOOLCHAIN_FILE="${MCUXSDK_ROOT}/core/tools/cmake_toolchain_files/armgcc.cmake" \
 			      -DCMAKE_BUILD_TYPE="${type}" \
+				  -DDETAILED_COMPILER_WARNINGS=OFF \
 			      -DbootDisk="${target}" \
 			      -B "${build_dir}" \
 			      -G "${GENERATOR}" \
