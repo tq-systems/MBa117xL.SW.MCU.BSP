@@ -60,7 +60,10 @@ main() {
 			echo "Building ..."
 			$CMAKE --build "${build_dir}" --config ${type} --target all -j "$(nproc)"
 
-			tar -cvf ${PROJECT_NAME}-${target}-${type}.tar.gz -C ${build_dir}/boards/dist/${type}/ ${target} --use-compress-program=gzip
+			tar --create --verbose --file=${PROJECT_NAME}-${target}-${type}.tar.gz \
+				--use-compress-program=gzip \
+				--directory=${build_dir}/dist/${type}/ \
+				 ${target}
 		done
 	done
 	echo "Build completed ..."
