@@ -5,7 +5,7 @@
  * \copyright
  * Copyright (c) 2021 - 2023 TQ-Systems GmbH <license@tq-group.com>,
  * D-82229 Seefeld, Germany.
- * Author: Isaac L. L. Yuki, Bernhardt Herz
+ * Author: Isaac L. L. Yuki, Bernhard Herz
  */
 //******************************************************************************
 
