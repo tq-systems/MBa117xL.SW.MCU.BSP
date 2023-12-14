@@ -21,6 +21,7 @@ function error_abort () {
 # Load variables from config file
 readonly SCRIPT="$(basename "${0}")"
 readonly PROJECT_PATH="$(dirname "$(readlink -f "$0")")/.."
+readonly SCRIPTPATH=$(dirname "$(readlink -f "${0}")")
 readonly CONFIG_FILE="$(dirname "$(readlink -f "$0")")/.config"
 
 . ${CONFIG_FILE}
@@ -39,6 +40,7 @@ main() {
 
 	# Step 0
 	${CMAKE} --version > /dev/null
+	local gitrev=$(${SCRIPTPATH}/git-revision-name.sh)
 
 	export ARMGCC_DIR
 	for type in ${BUILD_TYPES}; do
@@ -60,13 +62,14 @@ main() {
 			echo "Building ..."
 			$CMAKE --build "${build_dir}" --config ${type} --target all -j "$(nproc)"
 
-			tar --create --verbose --file=${PROJECT_NAME}-${target}-${type}.tar.gz \
+			tar --create --verbose --file=${PROJECT_NAME}.${target}-${type}.BIN.${gitrev}.tar.gz \
 				--use-compress-program=gzip \
 				--directory=${build_dir}/dist/${type}/ \
 				 ${target}
 		done
 	done
 	echo "Build completed ..."
+	${SCRIPTPATH}/git-archive-all.sh --format tar.gz --prefix ${PROJECT_NAME}.${gitrev}/ ${PROJECT_NAME}.SRC.${gitrev}.tar
 }
 
 main "$@"
