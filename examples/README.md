@@ -1,19 +1,18 @@
-MBa117xL Board {#MBa117xL_Board}
-==============
+# MBa117xL Board {#MBa117xL_Board}
 
-## Table of content
+## Table of Contents
 
 [[_TOC_]]
 
 ## Overview
-This README provides a comprehensive guide for using the MBa117xL board with the TQMBa1176L module using the M4-Cortex and the M7-Cortex. It includes several demo applications that showcase the capabilities of the board and the MCUXpresso SDK software. The demos range from simple sanity checks like the "Hello World" demo to more complex demonstrations of inter-core communication in a multicore system.
+This README provides a comprehensive guide for using the MBa117xL board with the TQMBa1176L module using the M4-Cortex and the M7-Cortex. It includes several demo applications that showcase the capabilities of the board and the MCUXpresso SDK software. The demos range from simple sanity checks like the "Hello World" demo to more complex demonstrations.
 
 ## Software requirements
 
 * General [requirements](../README.md#requirements)
 * MCUXpresso [Secure Provisioning Tool](https://www.nxp.com/design/design-center/software/development-software/mcuxpresso-software-and-tools-/mcuxpresso-secure-provisioning-tool:MCUXPRESSO-SECURE-PROVISIONING#downloads): V7
 
-## Trivial Hardware Requirements
+## Hardware Requirements
 
 | Hardware           | Description                                                                           | Pin Reference |
 | ------------------ | ------------------------------------------------------------------------------------- | ------------- |
@@ -24,53 +23,58 @@ This README provides a comprehensive guide for using the MBa117xL board with the
 
 Please note that these requirements are specific to the MBa117xL board using the TQMBa1176L module. Always refer to the specific READMEs of the demo you are running for any additional hardware requirements. Further informations can be found in the documentation directory.
 
-## Serial port configuration
-- Serial terminal has following settings:
-   - 115200 baud rate
-   - 8 data bits
-   - No parity
-   - One stop bit
-   - No flow control
-   - Select the COM-interface for the two cores.
+## Serial Port Configuration
 
+Configure the serial terminal with the following settings:
+- 115200 baud rate
+- 8 data bits
+- No parity
+- One stop bit
+- No flow control
+- Select the appropriate COM interface for the two cores.
 
 ## Applications
 
-Currently the MBa117xL supports following applications:
+The MBa117xL supports the following applications:
 
-| Application                                      | Purpose                                                                     |
-| ------------------------------------------------ | --------------------------------------------------------------------------- |
-| [demo_afe](./demo_afe/README.md)                 | Demonstrates the Analog Front End (AFE) capabilities                        |
-| [demo_digital_io](./demo_digital_io/README.md)   | Showcases basic functions of the port expander                              |
-| [demo_eeprom](./demo_eeprom/README.md)           | Illustrates the usage of the EEPROM M24C64                                  |
-| [demo_ethernet](./demo_ethernet/README.md)       | Demonstrates Ethernet communication features                                |
-| [demo_flexcan](./demo_flexcan/README.md)         | Shows the functionalities of the Flexible Controller Area Network (FlexCAN) |
-| [demo_gpio_led](./demo_gpio_led/README.md)       | Demonstrates General-Purpose Input/Output (GPIO) with LED control           |
-| [demo_hello_world](./demo_hello_world/README.md) | Basic "hello_world" demonstration                                           |
-| [demo_iot](./demo_iot/README.md)                 | Showcases IoT module BG95-M4                                                |
-| [demo_PMIC](./demo_PMIC/README.md)               | Demonstrates PMIC functionalities                                           |
-| [demo_rs485](./demo_rs485/README.md)             | Demonstrates operations over RS-485 communication standard                  |
-| [demo_RTC](./demo_RTC/README.md)                 | Shows in-built RTC's functionalities                                        |
-| [demo_sdcard](./demo_sdcard/README.md)           | Demonstrates reading from and writing to a Secure Digital (SD) card         |
-| [demo_SE97BTP](./demo_SE97BTP/README.md)         | Likely a demo for a specific component, possibly a sensor or module         |
-| [demo_spi_flash](./demo_spi_flash/README.md)     | Demonstrates SPI flash memory (MX25R1635F) operations                       |
-| [demo_usb](./demo_usb/README.md)                 | Demonstrates USB communication features                                     |
+| Application                                      | Purpose                                                                      |
+| ------------------------------------------------ | ---------------------------------------------------------------------------- |
+| [demo_afe](./demo_afe/README.md)                 | Demonstrates the Analog Front End (AFE) capabilities                         |
+| [demo_digital_io](./demo_digital_io/README.md)   | Illustrates basic functions of the port expander                             |
+| [demo_eeprom](./demo_eeprom/README.md)           | Illustrates the usage of the EEPROM M24C64                                   |
+| [demo_ethernet](./demo_ethernet/README.md)       | Demonstrates Ethernet communication features                                 |
+| [demo_flexcan](./demo_flexcan/README.md)         | Shows the functionalities of the Flexible Controller Area Network (FlexCAN)  |
+| [demo_gpio_led](./demo_gpio_led/README.md)       | Demonstrates General-Purpose Input/Output (GPIO) with LED control            |
+| [demo_hello_world](./demo_hello_world/README.md) | Basic "hello_world" demonstration                                            |
+| [demo_iot](./demo_iot/README.md)                 | Showcases IoT module BG95-M4                                                 |
+| [demo_PMIC](./demo_PMIC/README.md)               | Demonstrates PMIC functionalities                                            |
+| [demo_rs485](./demo_rs485/README.md)             | Demonstrates operations over RS-485 communication standard                   |
+| [demo_RTC](./demo_RTC/README.md)                 | Shows built-in RTC's functionalities                                         |
+| [demo_sdcard](./demo_sdcard/README.md)           | Demonstrates reading from and writing to a Secure Digital (SD) card          |
+| [demo_SE97BTP](./demo_SE97BTP/README.md)         | Showcases possible operations with the temperature-sensor and EEPROM SE97BTP |
+| [demo_spi_flash](./demo_spi_flash/README.md)     | Demonstrates SPI flash memory (MX25R1635F) operations                        |
+| [demo_usb](./demo_usb/README.md)                 | Demonstrates USB communication features                                      |
 
-The demos that are included are listed as directories.
-
-Each demo has its own README that provides more detailed information about the demo, including its purpose, how to prepare for the demo, and what to expect when running the demo.
+Each demo includes a README with more detailed information, including its purpose, preparation steps, and expectations when running the demo.
 
 ## Booting
 
-### Booting from internal RAM
+### Booting from Internal RAM
 
-You can run a target directly from the internal ram by simply loading it to the device.
+Load the desired target `.bin` file into address 0x00, or use a `.elf` file linked directly to the RAM to run a target from the internal RAM.
 
 ### Booting from Flash
 
-When utilizing J-Link programs for debugging or loading firmware onto the flash device, it's crucial to configure the correct FLEXSPI1 pin multiplexing for the MBa117xL. 
+When using J-Link for debugging or firmware loading, ensure the FLEXSPI1 pin multiplexing is correctly configured for the MBa117xL.
 
-__Attention__: Before booting it is **necessary** to set the right [fuses](#setting-fuses). 
+This are the settings for JLink-GDB related programs:
+
+```
+ "-device",
+ "MIMXRT1176xxxA_M7?BankAddr=0x30000000&Loader=nCS@AD18_CLK@AD19_D0@AD20_D1@AD21_D2@AD22_D3@AD23&BankAddr=0x60000000&Loader=nCS@SDB100_CLK@SDB101_D0@SDB102_D1@SDB103_D2@SDB104_D3@SDB105"
+```
+
+__Attention__: Before booting, it is **mandatory** to set the right [fuses](#setting-fuses).
 
 After setting fuses, set the dip switch as follow:
 
@@ -90,20 +94,37 @@ After setting fuses, set the dip switch as follow:
 | ---- | ---- | ---- | ---- |
 | OFF  | ON   | ON   | ON   |
 
-Now you should be able to load the target into the flash.
-
 ## Debugging
 
-Before debugging specify the appropriate device configuration in the [launch.json](../templates/launch.json) file:
+Before debugging, specify the appropriate device configuration in the [launch.json](../templates/launch.json) file. Refer to the [launch.json](../templates/launch.json) example provided.
 
-```
- "-device",
- "MIMXRT1176xxxA_M7?BankAddr=0x30000000&Loader=nCS@AD18_CLK@AD19_D0@AD20_D1@AD21_D2@AD22_D3@AD23&BankAddr=0x60000000&Loader=nCS@SDB100_CLK@SDB101_D0@SDB102_D1@SDB103_D2@SDB104_D3@SDB105"
-```
+## GDB-Server
 
-Additionally, with the version 7.92^ onwards in J-Link, you can now easily choose the required settings through the dropdown menu in the flash-bank setting, available across various J-Link programs including J-Link Flash, J-Link Flash Lite, and the J-Link GDB Server. 
+Use GDB for independent loading and debugging targets from your IDE:
 
-### Setting fuses
+  - Start GDB server.
+  - Select the connection via USB.
+  - Select device `MIMXRT1176xxxA_M7` and set the endian `Little Endian`.
+  - Select `JTAG` as interface with the fixed speed of 4000 kHz.
+    - __NOTE__: If debugging shouldn't work as expected, you can try changing the interface to SWD and/or varying the interface speed.
+  - Select the right flash bank for the FlexSPI 1: 
+    - `nCS@AD18_CLK@AD19_D0@AD20_D1@AD21_D2@AD22_D3@AD23&BankAddr=0x60000000&Loader=nCS@SDB100_CLK@SDB101_D0@SDB102_D1@SDB103_D2@SDB104_D3@SDB105`
+  - Further options are optional.
+  - Start then gdb via CLI.
+  - Follow the command for booting:
+
+   ```bat
+   file <PATH.elf>
+   target remote localhost:<port>
+   monitor reset
+   monitor halt
+   load
+   monitor go
+   ```
+
+## Setting fuses
+
+To boot from the flash device, follow these steps:
 
 - Power off the board.
 - Set the dipswitch as follow:
@@ -132,7 +153,7 @@ Additionally, with the version 7.92^ onwards in J-Link, you can now easily choos
 - Select `OTP Configuration`.
 - The OTP Configuration menu opens and asks to read the current values from the target processor,
 select “Yes” here. 
-- If the fuses can be read correctly the status message “Successfully udated fuses values” is shown in the message area at the bottom of the “OTP Configuration” window. 
+- If the fuses can be read correctly the status message “Successfully updated fuses values” is shown in the message area at the bottom of the “OTP Configuration” window. 
 - If something went wrong please check the connection to the target hardware and try to read the fuses again by clicking the “Read” button at the window bottom.
 - Now select the `fuse 0x9A0` from the Boot param section and select the wildcard on bit 10.
 - When clicking on the wildcard it changes from * to 1. The “Required value” should now be `0x400`. **Double check these values.**

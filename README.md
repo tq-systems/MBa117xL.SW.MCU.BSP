@@ -65,7 +65,7 @@ cd mcuxsdk
 west update
 ```
 
-__NOTE__: You can also install `mcuxsdk` in another path. If you did so, create before [building](#building) the enviromental variable `MCUXSDK_ROOT` pointing to the path of the `mcuxsdk`. Use the same procedure as for the variable [ARMGCC_DIR](#preparation).
+__NOTE__: You can also install `mcuxsdk` in another path. If you did so, set `MCUXSDK_ROOT` enviroment varialbe to `mcuxsdk` path before [building](#building). Use the same procedure as for the variable [ARMGCC_DIR](#preparation).
 
 Afterwards copy `replace_include_guards.py` into the same directory as of the `mcuxsdk`.
 __ATTENTION__: This step is absolute necessary! 
@@ -174,29 +174,7 @@ Before running a target, make sure you've minded the [boot instructions of your 
 
 ### Loading a target via GDB Server 
 
-If you prefer to boot without VS-Code follow this steps:
-
-  - Start GDB server.
-  - Select the connection via USB.
-  - Select device `MIMXRT1176xxxA_M7` and set the endian `Little Endian`.
-  - Select `JTAG` as interface with the fixed speed of 4000 kHz.
-    - __NOTE__: If debugging shouldn't work as expected, you can try changing the interface to SWD and/or varying the interface speed.
-  - Select the right flash bank for the FlexSPI 1: 
-    - `nCS@AD18_CLK@AD19_D0@AD20_D1@AD21_D2@AD22_D3@AD23&BankAddr=0x60000000&Loader=nCS@SDB100_CLK@SDB101_D0@SDB102_D1@SDB103_D2@SDB104_D3@SDB105`
-  - Select the SWD target interface and set speed to auto.
-  - Further options are optional.
-  - Start then gdb via CLI.
-  - Follow the command for booting:
-
-```bat
-#gdb-command
-file <PATH.elf>
-target remote localhost:<port>
-monitor reset
-monitor halt
-load
-monitor go
-```
+If you prefer to boot without VS-Code follow the instructions for debugging within the boards [README](./examples/README.md/#gdb-server).
 
 ### Loading a target VS-Code
 

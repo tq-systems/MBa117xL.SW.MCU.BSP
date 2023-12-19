@@ -10,14 +10,18 @@ See [Requirements](../../README.md#requirements).
 ## Board Settings
 The following table provides a generic connection guide for the port expander:
 
-| PIN  | Connects To | PIN/SOURCE   |
-| ---- | ----------- | ------------ |
-| 1A   | -           | SOURCE (~5V) |
-| 3A   | -           | 7A           |
-| 4A   | -           | 8A           |
-| 5A   | -           | 9A           |
-| 7A   | -           | 10A          |
-| DGND | -           | GND          |
+| PIN  | Connects to PIN/SOURCE |
+| ---- | ---------------------- |
+| 1A   | SOURCE (~5V)           |
+| 3A   | 7A                     |
+| 4A   | 8A                     |
+| 5A   | 9A                     |
+| 6A   | 10A                    |
+| DGND | GND                    |
+
+__NOTE__: GND pins are on the upper side of the port expander. These pins are interconnected.
+
+__NOTE__: If the demonstration doesn't work properly, try setting the source voltage on PIN 1A higher. 
 
 ## Demo Preparation
 1. Connect the appropriate power supply and J-Link Debug Probe to the board.
