@@ -30,15 +30,14 @@ Demonstration of the SE97BTP device. Press any button to initialize.
 Temperature of Mainboard in °C: <value>
 Reading starting from address: <value>
 Content: <string>
-Select an address for r/w. Write 257 if you want to erase the EEPROM.
+Select an address for r/w.
 <user input>
 Write something new into the EEPROM! Press enter if you want to skip.
 <user input>
 Temperature of Mainboard in degree Celsius: <new value>
 Reading starting from address: <new value>
 Content: <new content>
-Select an address for r/w. Write 257 if you want to erase the EEPROM.
-
+Select an address for r/w.
 ...
 
 ```

@@ -11,6 +11,8 @@ This guide contains instructions for configuring the build system, building targ
 
 ### Requirements:
 
+__NOTE__: The versions provided are the ones with which the build system and its artifacts were tested.
+
 - Arm GNU Toolchain: arm-gnu-toolchain-12.2.rel1-[host system]-arm-none-eabi
 - GCC: 12.2.1
 - Visual Studio Code: v1.8.1^
@@ -21,7 +23,7 @@ This guide contains instructions for configuring the build system, building targ
 - For Windows:
   - MinGW: v13.1.0
 - For Debug only:
-  - [Segger J-link](https://www.segger.com/downloads/jlink/): v7.92
+  - [Segger J-link](https://www.segger.com/downloads/jlink/): v7.92l
 
 #### VS-Code extensions
 
@@ -63,10 +65,10 @@ cd mcuxsdk
 west update
 ```
 
-__Note__: You can also install `mcuxsdk` in another path. If you did so, create before [building](#building) the enviromental variable `MCUXSDK_ROOT` pointing to the path of the `mcuxsdk`. Use the same procedure as for the variable [ARMGCC_DIR](#preparation).
+__NOTE__: You can also install `mcuxsdk` in another path. If you did so, set `MCUXSDK_ROOT` enviroment varialbe to `mcuxsdk` path before [building](#building). Use the same procedure as for the variable [ARMGCC_DIR](#preparation).
 
 Afterwards copy `replace_include_guards.py` into the same directory as of the `mcuxsdk`.
-__Attention__: This step is absolute necessary! 
+__ATTENTION__: This step is absolute necessary! 
 
 After downloading the SDK from NXP using West, the Python script `replace_include_guards.py`
 must be run once. This is required because targets set to `global` cannot be built
@@ -152,7 +154,7 @@ in [.vscode](./.vscode) folder. Use the [examples](./templates/README.md) for gu
     one to configure the debug settings for VS-Code ([settings.json](./templates/settings.json)) 
     and a second to setup the debugger configuration ([launch.json](./templates/launch.json)).
     [Here is an entire guide for setting up VS-Code in order to use J-Link segger as debugger with VS-Code](https://wiki.segger.com/J-Link_Visual_Studio_Code).
-- __Attention:__ Please refer, if existing, to the README of your board for further details on setting up the debugger. Some boards may require special settings.
+- __ATTENTION:__ Please refer, if existing, to the README of your board for further details on setting up the debugger. Some boards may require special settings.
   - The Readme should be placed under: `examples/README.md`.
 
 #### Building target
@@ -166,14 +168,30 @@ Click after selection of the desired options on "Build" to build your target(s).
 
 Optionally you can choose the target within the CMake-menu-bar. 
 
+## Loading targets
+
+Before running a target, make sure you've minded the [boot instructions of your board](./examples/README.md/#booting).
+
+### Loading a target via GDB Server 
+
+If you prefer to boot without VS-Code follow the instructions for debugging within the boards [README](./examples/README.md/#gdb-server).
+
+### Loading a target VS-Code
+
+  You can follow the instructions for [debugging with VS-Code](#debugging-with-vs-code). 
+
 ## Debugging
 
 ### Debugging with VS-Code
 
 The repository utilizes `JLinkGDBServerCL` alongside the appropriate hardware for debugging in VS-Code. To initiate debugging, you need to configure the [debug tool](#setting-up-vs-code). Once configured, select the debug tool from the left menu bar and choose the desired debug configuration specified within the [launch.json](/templates/launch.json). To begin debugging, either click on `start debugging` or press `F5`.
 
-- __Attention:__ Please refer, if existing, to the README of your board for further details on setting up the debugger. Some boards may require special settings. 
+- __ATTENTION:__ Please refer, if existing, to the README of your board for further details on setting up the debugger. Some boards may require special settings. 
   - The Readme should be placed under: `examples/README.md`.
+
+## Applications
+
+The list of all applications can found in [board](./examples/README.md#applications) README file.
 
 ## Build system
 
@@ -261,3 +279,7 @@ SPDX-License-Identifier: BSD-3-Clause
 Copyright (c) 2021 - 2023 TQ-Systems GmbH <license@tq-group.com>,
 D-82229 Seefeld, Germany.
 Author: Isaac L. L. Yuki
+
+## Support Wiki
+
+Please refer to our [support wiki](https://support.tq-group.com/) for more information.

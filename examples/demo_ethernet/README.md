@@ -24,6 +24,9 @@ No special settings are required for this demo.
 5. Download the program to the target board.
 
 ## Running the Demo
+
+__NOTE__: Port X36 isn't supported yet.
+
 Upon successful execution, the following logs will be displayed in the terminal (values are exemplary):
 
 ```
