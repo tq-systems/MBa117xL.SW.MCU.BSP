@@ -37,8 +37,6 @@ TQ-Systems GmbH
 This is a demo application for the device <module-board>.
 Welcome to the demonstration.
 
-Please press any Button to execute the SD Card test. Make sure you've inserted a SD Card!
-
 <user input>
 
 --> Card detected

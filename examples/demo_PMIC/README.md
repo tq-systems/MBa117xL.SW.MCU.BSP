@@ -33,24 +33,21 @@ Upon successful execution, the following message will be displayed in the termin
 
 ```
 
-TQ-Systems GmbH
-This is a demo application for the device <module-board>.
-Welcome to the demonstration.
+  TQ-Systems GmbH
+  This is a demo application for the device <module-board>.
+  Welcome to the demonstration.
 
-PMIC demonstration. Press any button.
-
-<user input>
-
-Searching for device...
-
-[ OK ]	PMIC PF5020 QM
-
-Select one of three power states. 1/2/3
-
-    - Actual VDD_SOC: <Previous Voltage Value> V
-
-    - New VDD_SOC:    <New Voltage Value> V
-
-    ...
-
+  Searching for device...
+  [ OK ]	PMIC PF5020 QM
+  Select one of three power states. 1/2/3
+  <input> 1
+   	 - New VDD_SOC:    1.000 V
+  Select one of three power states. 1/2/3
+  <input> 2
+   	 - New VDD_SOC:    1.100 V
+  Select one of three power states. 1/2/3
+  <input> 3
+   	 - New VDD_SOC:    0.900 V
+  Select one of three power states. 1/2/3
+ ...
 ```

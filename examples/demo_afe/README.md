@@ -12,12 +12,14 @@ See [Requirements](../../README.md#requirements).
 The following table provides a generic connection guide:
 
 
-| PIN  | Connects To | PIN/SOURCE              |
-| ---- | ----------- | ----------------------- |
-| AIxP | -           | Analog voltage max. 25V |
-| GND  | -           | GND                     |
+| PIN  | Connects to PIN/SOURCE  |
+| ---- | ----------------------- |
+| AIxP | Analog voltage max. 25V |
+| GND  | GND                     |
 
 X: 1 <= x <= 4
+
+__NOTE__: GND pins are on the upper side of connector X38. These pins are interconnected.
 
 ## Demo Preparation
 1. Connect the J-Link Debug Probe to the board.
