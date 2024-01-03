@@ -19,7 +19,7 @@ The following table provides a generic connection guide:
 
 X: 1 <= x <= 4
 
-__NOTE__: GND pins are on the upper side of the port expander. These pins are interconnected.
+__NOTE__: GND pins are on the upper side of connector X38. These pins are interconnected.
 
 ## Demo Preparation
 1. Connect the J-Link Debug Probe to the board.

@@ -19,9 +19,9 @@ The following table provides a generic connection guide for the port expander:
 | 6A   | 10A                    |
 | DGND | GND                    |
 
-__NOTE__: GND pins are on the upper side of the port expander. These pins are interconnected.
+__NOTE__: GND pins are on the upper side of connector X37. These pins are interconnected.
 
-__NOTE__: If the demonstration doesn't work properly, try setting the source voltage on PIN 1A higher. 
+__NOTE__: If the demonstration doesn't work properly, try increasing the source voltage on PIN 1A. 
 
 ## Demo Preparation
 1. Connect the appropriate power supply and J-Link Debug Probe to the board.

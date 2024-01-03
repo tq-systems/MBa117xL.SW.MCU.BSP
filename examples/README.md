@@ -59,9 +59,11 @@ Each demo includes a README with more detailed information, including its purpos
 
 ## Booting
 
+Refer to [GDB-Server](#gdb-server) or follow instructions for [VS-Code debugging](#debugging) in order to load the targets after setting up the proper booting configuration. 
+
 ### Booting from Internal RAM
 
-Load the desired target `.bin` file into address 0x00, or use a `.elf` file linked directly to the RAM to run a target from the internal RAM.
+Load the desired target `.bin` file into address 0x00 or use a `.elf` file linked directly to the internal RAM. 
 
 ### Booting from Flash
 
@@ -96,7 +98,7 @@ After setting fuses, set the dip switch as follow:
 
 ## Debugging
 
-Before debugging, specify the appropriate device configuration in the [launch.json](../templates/launch.json) file. Refer to the [launch.json](../templates/launch.json) example provided.
+Before debugging, specify the appropriate device configuration in the [launch.json](../templates/launch.json) file. Refer to the [launch.json](../templates/launch.json) example provided. Follow the instructions on [debugging with VS-Code](../README.md/#debugging-with-vs-code).
 
 ## GDB-Server
 
