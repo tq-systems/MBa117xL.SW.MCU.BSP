@@ -10,3 +10,8 @@ Releases are named with the following scheme:
 ## [MBa117xL.SW.MCU.BSP.0001] - 2024-01-04
 
 First release.
+
+# [MBa117xL.SW.MCU.BSP.0002] - 2024-01-08
+
+## Changed:
+ * Improved documentation.
