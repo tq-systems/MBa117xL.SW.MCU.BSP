@@ -2,12 +2,11 @@
 
 This guide contains instructions for configuring the build system, building targets, and executing the demonstration applications included in this repository, specifically designed for TQ-developed boards using the i.MX MCU family from NXP.
 
-
-## Table of content
+## Table of Contents
 
 [[_TOC_]]
 
-## Getting started
+## Getting Started
 
 ### Requirements:
 
@@ -25,34 +24,34 @@ __NOTE__: The versions provided are the ones with which the build system and its
 - For Debug only:
   - [Segger J-link](https://www.segger.com/downloads/jlink/): v7.92l
 
-#### VS-Code extensions
+#### VS-Code Extensions
 
 - CMake tools (from Microsoft): v1.16.3^
   - ID: `ms-vscode.cmake-tools`
-  - __Advice:__  Check if the 'Status-Bar-Visibillity' option is set to 'visible'.
+  - __Advice:__  Check if the 'Status-Bar-Visibility' option is set to 'visible'.
 - For Debug only:
-  - Cortex-Debug (from marus25): v1.12.0^,
+  - Cortex-Debug (from marus25): v1.12.0^
     - ID: `marus25.cortex-debug`
 
 ### Preparation
 
-* Python3 installation (needed for west repo tool and helper scripts).
+* Python3 installation (needed for the west repo tool and helper scripts).
 * Install [Arm GNU Toolchain](https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain).
-  Use the .exe-file for installation or unpack the archive to the desired path.
-* Install [CMake](https://cmake.org/download/) and make sure that `CMake` is added to the system path.
+  Use the .exe file for installation or unpack the archive to the desired path.
+* Install [CMake](https://cmake.org/download/) and ensure that `CMake` is added to the system path.
 * Windows only: Install [MinGW](https://github.com/nxp-mcuxpresso/mcux-sdk/blob/main/docs/run_a_project_using_armgcc.md)
   and add its bin directory to the system PATH variable. For example: `<Path to MinGW>/MinGW/bin`.
-* Set environmental variable ARMGCC_DIR pointing to the toolchain installation dir:
+* Set the environmental variable ARMGCC_DIR pointing to the toolchain installation dir:
    - Use the "cmake.environment" option under [settings.json](https://github.com/microsoft/vscode-cmake-tools/blob/main/docs/cmake-settings.md).
-   - create a system variable.
+   - Create a system variable.
 * Debugging only: Install [Segger J-link](https://www.segger.com/downloads/jlink/) (Version used: `7.92`).
 * Clone via 'west' [NXP's mcu-sdk](https://github.com/nxp-mcuxpresso/mcux-sdk) repository
   following the instructions under [Clone repository from NXP](#clone-repository-from-nxp).
 
-#### Clone repository from NXP
+#### Clone Repository from NXP
 
-This repository uses [`NXPs mcuxsdk`](https://github.com/nxp-mcuxpresso/mcux-sdk) repository.
-NXP's mcuxsdk uses the [`Zephyr West Tool`](https://github.com/zephyrproject-rtos/west)
+This repository uses [`NXP's MCUX SDK`](https://github.com/nxp-mcuxpresso/mcux-sdk) repository.
+NXP's MCUX SDK uses the [`Zephyr West Tool`](https://github.com/zephyrproject-rtos/west)
 to manage multiple Git repositories.
 
 To clone the NXP's mcu-sdk repository using West, open a terminal and execute the following commands:
@@ -65,52 +64,48 @@ cd mcuxsdk
 west update
 ```
 
-__NOTE__: You can also install `mcuxsdk` in another path. If you did so, set `MCUXSDK_ROOT` enviroment varialbe to `mcuxsdk` path before [building](#building). Use the same procedure as for the variable [ARMGCC_DIR](#preparation).
+__NOTE__: You can also install `mcuxsdk` in another path. If you did so, set the `MCUXSDK_ROOT` environment variable to the `mcuxsdk` path before [building](#building). Use the same procedure as for the variable [ARMGCC_DIR](#preparation).
 
-Afterwards copy `replace_include_guards.py` into the same directory as of the `mcuxsdk`.
-__ATTENTION__: This step is absolute necessary! 
+Afterwards, copy `replace_include_guards.py` into the same directory as the `mcuxsdk`.
+__ATTENTION__: This step is absolutely necessary! 
 
 After downloading the SDK from NXP using West, the Python script `replace_include_guards.py`
 must be run once. This is required because targets set to `global` cannot be built
-in the same build folder due to the existing include guards in the cmake files 
-in NXP SDK.
+in the same build folder due to the existing include guards in the CMake files 
+in the NXP SDK.
 
 ```
 cd <project path>
 python3 <project path>/dependencies/replace_include_guards.py
 ```
 
-This step will be executed automatically everytime CMake generates the build-system. CMake will check  for the `patched.txt file` in
-your `mcuxsdk dir` after every execution. If this file exists, the patch script
+This step will be executed automatically every time CMake generates the build system. CMake will check for the `patched.txt` file in
+your `mcuxsdk` dir after every execution. If this file exists, the patch script
 won't be executed again through a build command.
 
 ## Building 
 
-### Building from command line
+### Building from the Command Line
 
-When using from command line, cmake has to know where to find the toolchain:
+When using from the command line, CMake has to know where to find the toolchain:
 
-* Set environment variable `ARMGCC_DIR` pointing to toolchain installation dir.
+* Set the environment variable `ARMGCC_DIR` pointing to the toolchain installation dir.
 * If using multiple versions of `cmake` in parallel, you can define a variable
   `CMAKE` pointing to the executable to use.
-* Use following flags to configure your build from the `cmake` commandline.
+* Use the following flags to configure your build from the `cmake` command line.
 
 |          Flag          |                                              Meaning                                              |
 | :--------------------: | :-----------------------------------------------------------------------------------------------: |
 | `CMAKE_TOOLCHAIN_FILE` | must point to `<project path>/dependencies/mcuxsdk/core/tools/cmake_toolchain_files/armgcc.cmake` |
 |   `CMAKE_BUILD_TYPE`   |                  following different types are tested in SDK: `Debug`, `Release`                  |
-|       `bootDisk`       |                               Linker file selection `Ram`, `Flash`                                |
+|       `bootDisk`       |                            Linker file selection, e.g., `Ram`, `Flash`                            |
 
-* Settings for `bootDisk`
-  * Ram: Linking for TCM.
-  * Flash: Linking for QSPI NOR.
-
-__NOTE__: Linking for SD-Ram isn't available yet and is planed to be included.
+__NOTE__: Available `bootDisk` settings are listed under the specific board README.
 
 * Set the build directory to the path `build` using `-B <project path>/build`.
 * Set the build generator using `-G <your generator>`.
 
-#### Generate build system command
+#### Generate Build System Command
 
 ```bash
 cd <project path>
@@ -119,7 +114,7 @@ cmake -DCMAKE_TOOLCHAIN_FILE="dependencies\mcuxsdk\core\tools\cmake_toolchain_fi
 
 * Build the target.
 
-#### Build target command
+#### Build Target Command
 
 ```bash
 cd <project path>
@@ -134,32 +129,34 @@ When using the VS-Code support, the following additional steps are needed:
 * Follow instructions for [setting up VS-Code](#setting-up-vs-code).
 
 Flags like `CMAKE_TOOLCHAIN_FILE`, `CMAKE_BUILD_TYPE`, `bootDisk` should be set
-in [.vscode](./.vscode) folder. Use the [examples](./templates/README.md) for guidance.
+in the [.vscode](./.vscode) folder. Use the [examples](./templates/README.md) for guidance.
 
-#### Setting up VS-Code
+#### Setting Up VS-Code
 
-- Open Visual Studio in the applications folder.
-- Please refer to the [example templates](./templates/) when setting up VS-Code. You should have at least the same `.json-files` and `.yaml-files` in your [.vscode folder](./.vscode)  by the end of this section.
+- Open Visual Studio from the applications folder.
+- Please refer to the [example templates
+
+](./templates/) when setting up VS-Code. You should have at least the same `.json-files` and `.yaml-files` in your [.vscode folder](./.vscode) by the end of this section.
 - Install the [CMake tools extension by Microsoft](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools).
   - Ctrl+P: `ext install ms-vscode.cmake-tools` or search for the extension under the menu extensions on the left bar.
   - Adjust [settings.json](https://github.com/microsoft/vscode-cmake-tools/blob/main/docs/cmake-settings.md)
     in the [.vscode](./.vscode) folder accordingly to your environment:
     [Click here to open the example file for Windows](./templates/settings.json).
-  - Ensure you got the [cmake-variants.yaml file](./templates/cmake-variants.yaml). 
-- For Debug only: Install [cortex-debug ](https://github.com/Marus/cortex-debug/wiki)
+  - Ensure you have the [cmake-variants.yaml file](./templates/cmake-variants.yaml). 
+- For Debug only: Install [cortex-debug](https://github.com/Marus/cortex-debug/wiki)
   extension from marus25.
   - either use `Ctrl+P` and `ext install marus25.cortex-debug`
   - or search for the extension under the menu extensions on the left bar
   - Set up the desired configurations for debug on VS-Code. You will need two files,
     one to configure the debug settings for VS-Code ([settings.json](./templates/settings.json)) 
-    and a second to setup the debugger configuration ([launch.json](./templates/launch.json)).
-    [Here is an entire guide for setting up VS-Code in order to use J-Link segger as debugger with VS-Code](https://wiki.segger.com/J-Link_Visual_Studio_Code).
+    and a second to set up the debugger configuration ([launch.json](./templates/launch.json)).
+    [Here is an entire guide for setting up VS-Code in order to use J-Link Segger as a debugger with VS-Code](https://wiki.segger.com/J-Link_Visual_Studio_Code).
 - __ATTENTION:__ Please refer, if existing, to the README of your board for further details on setting up the debugger. Some boards may require special settings.
-  - The Readme should be placed under: `examples/README.md`.
+  - The README should be placed under: `examples/README.md`.
 
-#### Building target
+#### Building Target
 
-After fulfillment of the preparations VS-Code should be displaying the CMake-Tools
+After fulfilling the preparations, VS-Code should be displaying the CMake-Tools
 option on the lower bar. In order to build a target, select the build variant by
 clicking on the corresponding option. You can also select your target by clicking
 on "set default build target".
@@ -168,15 +165,15 @@ Click after selection of the desired options on "Build" to build your target(s).
 
 Optionally you can choose the target within the CMake-menu-bar. 
 
-## Loading targets
+## Loading Targets
 
 Before running a target, make sure you've minded the [boot instructions of your board](./examples/README.md/#booting).
 
-### Loading a target via GDB Server 
+### Loading a Target via GDB Server 
 
-If you prefer to boot without VS-Code follow the instructions for debugging within the boards [README](./examples/README.md/#gdb-server).
+If you prefer to boot without VS-Code, follow the instructions for debugging within the board's [README](./examples/README.md/#gdb-server).
 
-### Loading a target VS-Code
+### Loading a Target with VS-Code
 
   You can follow the instructions for [debugging with VS-Code](#debugging-with-vs-code). 
 
@@ -187,15 +184,15 @@ If you prefer to boot without VS-Code follow the instructions for debugging with
 The repository utilizes `JLinkGDBServerCL` alongside the appropriate hardware for debugging in VS-Code. To initiate debugging, you need to configure the [debug tool](#setting-up-vs-code). Once configured, select the debug tool from the left menu bar and choose the desired debug configuration specified within the [launch.json](/templates/launch.json). To begin debugging, either click on `start debugging` or press `F5`.
 
 - __ATTENTION:__ Please refer, if existing, to the README of your board for further details on setting up the debugger. Some boards may require special settings. 
-  - The Readme should be placed under: `examples/README.md`.
+  - The README should be placed under: `examples/README.md`.
 
 ## Applications
 
-The list of all applications can found in [board](./examples/README.md#applications) README file.
+The list of all applications can be found in the [board](./examples/README.md#applications) README file.
 
-## Build system
+## Build System
 
-### Structure of repository
+### Structure of Repository
 
 The general structure is constituted in such a way that it was tried to create as
 little maintenance effort for the demo repo as possible. Thus, everything that can
@@ -205,11 +202,11 @@ be summarized in higher-level folders is also deposited there.
 | ---------------------------------------- | ------------------------------------------------------------------------------ |
 | `templates`                              | Examples for the VS-Code setting files.                                        |
 | `templates/cmake-variants.yaml`          | The Build-Type configurations.                                                 |
-| `templates/settings.json`                | Configurations for  CMake and the cortex-debug-tool.                           |
+| `templates/settings.json`                | Configurations for  CMake and the cortex-debug tool.                           |
 | `templates/launch.json`                  | All debug configurations.                                                      |
-| `examples`                               | Path for the demo-applications.                                                |
-| `examples/board`                         | Generic files used for every app and board specific information/configuration. |
-| `examples/board/cmake`                   | CMake related files used for integrating the board in the build system.        |
+| `examples`                               | Path for the demo applications.                                                |
+| `examples/board`                         | Generic files used for every app and board-specific information/configuration. |
+| `examples/board/cmake`                   | CMake related files used for integrating the board into the build system.      |
 | `examples/board/<file>.mex`              | Configuration file used in MCUX-Config Tools.                                  |
 | `build`                                  | All build-related files.                                                       |
 | `build/boards/<boardtype>/dist`          | Location for images.                                                           |
@@ -230,32 +227,21 @@ one build directory can now be used for all apps here. Using the `add_subdirecto
 command, a directory is added per level, so that there are no conflicts per target.
 However, this has the disadvantage that the order of all includes must be correct.
 
-### Programming apps
+### Programming Apps
 
-This guide provides instructions and hints on how to structure the build system within the context
-of the MCUXpresso-SDKs and the build system structure within this repository when
-creating new apps or boards.
+This guide provides instructions and hints on structuring the build system within the context of MCUXpresso SDKs and the build system structure within this repository when creating new apps or boards.
 
-When creating a new application, a new folder for the application has to be created and the `CMakeLists.txt` file located in `.../examples`
-must be updated. A new `CMakeLists.txt` file should be placed within the new application directory.
-You can use any of the `CMakeLists.txt` files from the demo applications as a template.
-When a new directory with an application is created, it must be added to `examples/CMakeLists.txt`. The variables
-specified in the `examples/CMakeList.txt` folder must be adjusted accordingly.
+To create a new application, you must create a new folder for it and update the `CMakeLists.txt` file located in `../examples`. Place a new `CMakeLists.txt` file within the new application directory. You can use any of the `CMakeLists.txt` files from the demo applications as a template. Once a new directory with an application is created, it must be added to `examples/CMakeLists.txt`, and the variables in the `examples/CMakeList.txt` folder must be adjusted accordingly.
 
-The `CMakeLists.txt` file in the `examples/<app_name>` directory ensures the correct
-inclusion of files. To use `flags_macros` for linking/compiling and to configure NXP's modules,
-create a `config.cmake` file. Templates for this can also be found in the demo applications.
+The `CMakeLists.txt` file in the `examples/<app_name>` directory ensures the correct inclusion of files. To use `flags_macros` for linking/compiling and configure NXP modules, create a `config.cmake` file. Templates for this can also be found in the demo applications.
 
-You can add special files globally to all targets by adding them to the var `BOARD_SRCS` or specific to one target by adding them to the list under `add_executable`. Mind that you also should point to the directory where they are located by adding it to `target_include_directories`, if the directory you are using is newly created.
+You can add special files globally to all targets by adding them to the `BOARD_SRCS` variable, or specifically to one target by adding them to the list under `add_executable`. Note that you should also point to the directory where these files are located by adding it to `target_include_directories`, especially if the directory is newly created.
 
-If you need own board files instead of the default one in this repository, reset the `BOARD_SRCS` variable with your own file list and the `BoardDirPath` variable with the directory you're aiming for.
+If you need your own board files instead of the default ones in this repository, reset the `BOARD_SRCS` variable with your own file list and the `BoardDirPath` variable with your desired directory.
 
-Compiler and linker flags are set in the `flags.cmake` file in the `examples/board/cmake`
-directory. However, to configure specific flags, use the `config.cmake` file in the application
-folder. There is also a `flags_macros.cmake` file under [cmake](./cmake) in top level dir.
+Compiler and linker flags are set in the `flags.cmake` file in the `examples/board/cmake` directory. However, to configure specific flags, use the `config.cmake` file in the application folder. There is also a `flags_macros.cmake` file under [cmake](./cmake) in the top-level directory.
 
-When programming, use the linker scripts provided by TQ. You can include your own linker
-files using the set commands with the vars:
+When programming, use the linker scripts provided by TQ. You can include your own linker files using the set commands with the variables:
 
 ```
 set(LINKER_FILE_RAM "<your_path>")
@@ -263,18 +249,17 @@ set(LINKER_FILE_FLASH "<your_path>")
 ...
 ```
 
-The command should be placed in the `CMakeLists.txt` of the application directory
-before including `flags.cmake`.
+Place the command in the `CMakeLists.txt` of the application directory before including `flags.cmake`.
 
-The examples under `mcuxsdk/examples` can be helpful for learning about NXP's API.
+For learning about NXP's API, the examples under `mcuxsdk/examples` can be helpful.
 
 ## License
 
-Except where otherwise noted, all files within this repository are licensed under the following terms,
-excluding build system files (such as .cmake), configuration files for development environments
-(such as Visual Studio Code setup files):
+Except where otherwise noted, all files within this repository are licensed under the following terms, excluding build system files (such as .cmake) and configuration files for development environments (such as Visual Studio Code setup files):
 
-SPDX-License-Identifier: BSD-3-Clause
+SPDX-License-Identifier: [BSD-3-Clause](./license.bsd3.md)
+
+All documentation is licensed under [CC-BY-4.0 (Creative Commons Attribution 4.0 International Public License)](./COPYING.CC-BY-4.0).
 
 Copyright (c) 2021 - 2023 TQ-Systems GmbH <license@tq-group.com>,
 D-82229 Seefeld, Germany.
@@ -282,4 +267,4 @@ Author: Isaac L. L. Yuki
 
 ## Support Wiki
 
-Please refer to our [support wiki](https://support.tq-group.com/) for more information.
+For more information, please refer to our [support wiki](https://support.tq-group.com/).
