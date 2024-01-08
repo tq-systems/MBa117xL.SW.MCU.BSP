@@ -257,7 +257,9 @@ For learning about NXP's API, the examples under `mcuxsdk/examples` can be helpf
 
 Except where otherwise noted, all files within this repository are licensed under the following terms, excluding build system files (such as .cmake) and configuration files for development environments (such as Visual Studio Code setup files):
 
-SPDX-License-Identifier: BSD-3-Clause
+SPDX-License-Identifier: [BSD-3-Clause](./license.bsd3.md)
+
+All documentation is licensed under [CC-BY-4.0 (Creative Commons Attribution 4.0 International Public License)](./COPYING.CC-BY-4.0).
 
 Copyright (c) 2021 - 2023 TQ-Systems GmbH <license@tq-group.com>,
 D-82229 Seefeld, Germany.
