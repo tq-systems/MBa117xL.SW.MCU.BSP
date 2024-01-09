@@ -134,9 +134,7 @@ in the [.vscode](./.vscode) folder. Use the [examples](./templates/README.md) fo
 #### Setting Up VS-Code
 
 - Open Visual Studio from the applications folder.
-- Please refer to the [example templates
-
-](./templates/) when setting up VS-Code. You should have at least the same `.json-files` and `.yaml-files` in your [.vscode folder](./.vscode) by the end of this section.
+- Please refer to the [example templates](./templates/) when setting up VS-Code. You should have at least the same `.json-files` and `.yaml-files` in your [.vscode folder](./.vscode) by the end of this section.
 - Install the [CMake tools extension by Microsoft](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools).
   - Ctrl+P: `ext install ms-vscode.cmake-tools` or search for the extension under the menu extensions on the left bar.
   - Adjust [settings.json](https://github.com/microsoft/vscode-cmake-tools/blob/main/docs/cmake-settings.md)
@@ -259,10 +257,10 @@ Except where otherwise noted, all files within this repository are licensed unde
 
 SPDX-License-Identifier: [BSD-3-Clause](./license.bsd3.md)
 
-All documentation is licensed under [CC-BY-4.0 (Creative Commons Attribution 4.0 International Public License)](./COPYING.CC-BY-4.0).
+All documentation is licensed under [CC-BY-4.0 (Creative Commons Attribution 4.0International Public License)](./COPYING.CC-BY-4.0).
 
-Copyright (c) 2021 - 2023 TQ-Systems GmbH <license@tq-group.com>,
-D-82229 Seefeld, Germany.
+Copyright (c) 2021 - 2023 TQ-Systems GmbH <license@tq-group.com>,  
+D-82229 Seefeld, Germany.  
 Author: Isaac L. L. Yuki
 
 ## Support Wiki
