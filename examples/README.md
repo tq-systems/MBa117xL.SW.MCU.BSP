@@ -6,13 +6,15 @@
 
 ## Overview
 
-This README provides a comprehensive guide for using the MBa117xL board with the TQMBa1176L module using the M4-Cortex and the M7-Cortex. It includes several demo applications that showcase the capabilities of the board and the MCUXpresso SDK software. The demos range from simple sanity checks like the "Hello World" demo to more complex demonstrations.
-
+This README provides a comprehensive guide for using the MBa117xL board with the TQMBa1176L module using the M4-Cortex
+and the M7-Cortex. It includes several demo applications that showcase the capabilities of the board and the MCUXpresso
+SDK software. The demos range from simple sanity checks like the "Hello World" demo to more complex demonstrations.
 
 ## Software Requirements
 
 - General [requirements](../README.md#requirements)
-- MCUXpresso [Secure Provisioning Tool](https://www.nxp.com/design/design-center/software/development-software/mcuxpresso-software-and-tools-/mcuxpresso-secure-provisioning-tool:MCUXPRESSO-SECURE-PROVISIONING#downloads): V7
+- MCUXpresso [Secure Provisioning Tool](https://www.nxp.com/design/design-center/software/development-software/mcuxpresso-software-and-tools-/mcuxpresso-secure-provisioning-tool:MCUXPRESSO-SECURE-PROVISIONING#downloads)
+: V7
 
 ## Hardware Requirements
 
@@ -23,11 +25,14 @@ This README provides a comprehensive guide for using the MBa117xL board with the
 | Personal Computer  | Required for programming and interacting with the board.                              | -             |
 | Power Supply       | A power supply with a voltage of 24V is required to power the board.                  | X13           |
 
-Please note that these requirements are specific to the MBa117xL board using the TQMBa1176L module. Always refer to the specific READMEs of the demo you are running for any additional hardware requirements. Further informations can be found in the documentation directory.
+Please note that these requirements are specific to the MBa117xL board using the TQMBa1176L module. Always refer to the
+specific READMEs of the demo you are running for any additional hardware requirements. Further informations can be found
+in the documentation directory.
 
 ## Serial Port Configuration
 
 Configure the serial terminal with the following settings:
+
 - 115200 baud rate
 - 8 data bits
 - No parity
@@ -44,7 +49,8 @@ The MBa117xL supports the following applications:
 | [demo_afe](./demo_afe/README.md)                 | Demonstrates the Analog Front End (AFE) capabilities                         |
 | [demo_digital_io](./demo_digital_io/README.md)   | Illustrates basic functions of the port expander                             |
 | [demo_eeprom](./demo_eeprom/README.md)           | Illustrates the usage of the EEPROM M24C64                                   |
-| [demo_ethernet](./demo_ethernet/README.md)       | Demonstrates Ethernet communication features                                 |
+| [demo_ethernet_qos](./demo_ethernet_qos/README.md) | Demonstrates Ethernet communication features                               |
+| [demo_ethernet_1g](./demo_ethernet_1g/README.md) | Demonstrates Ethernet communication features                                 |
 | [demo_flexcan](./demo_flexcan/README.md)         | Shows the functionalities of the Flexible Controller Area Network (FlexCAN)  |
 | [demo_gpio_led](./demo_gpio_led/README.md)       | Demonstrates General-Purpose Input/Output (GPIO) with LED control            |
 | [demo_hello_world](./demo_hello_world/README.md) | Basic "hello_world" demonstration                                            |
@@ -56,8 +62,10 @@ The MBa117xL supports the following applications:
 | [demo_SE97BTP](./demo_SE97BTP/README.md)         | Showcases possible operations with the temperature-sensor and EEPROM SE97BTP |
 | [demo_spi_flash](./demo_spi_flash/README.md)     | Demonstrates SPI flash memory (MX25R1635F) operations                        |
 | [demo_usb](./demo_usb/README.md)                 | Demonstrates USB communication features                                      |
+| [demo_display_dsi](./demo_display_dsi/README.md) | Demonstrates DSI display feature                                             |
 
-Each demo includes a README with more detailed information, including its purpose, preparation steps, and expectations when running the demo.
+Each demo includes a README with more detailed information, including its purpose, preparation steps, and expectations
+when running the demo.
 
 ### Bootdisk Settings
 
@@ -67,12 +75,14 @@ These are the available settings for `bootDisk`:
 
 - Ram: Linking for TCM.
 - Flash: Linking for QSPI NOR.
+- SD-Ram-Flash: Linking for QSPI NOR activating the SD-RAM.
 
 __NOTE__: Linking for SD-RAM isn't available yet and is planned to be included.
 
 ## Booting
 
-Refer to [GDB-Server](#gdb-server) or follow the instructions for [VS-Code debugging](#debugging) to load the targets after setting up the proper booting configuration.
+Refer to [GDB-Server](#gdb-server) or follow the instructions for [VS-Code debugging](#debugging) to load the targets
+after setting up the proper booting configuration.
 
 ### Booting from Internal RAM
 
@@ -80,11 +90,12 @@ Load the desired target `.bin` file into address 0x00 or use a `.elf` file linke
 
 ### Booting from Flash
 
-When using J-Link for debugging or firmware loading, ensure the FLEXSPI1 pin multiplexing is correctly configured for the MBa117xL.
+When using J-Link for debugging or firmware loading, ensure the FLEXSPI1 pin multiplexing is correctly configured for the
+MBa117xL.
 
 These are the settings for JLink-GDB related programs:
 
-```
+``` json
 "-device",
  "MIMXRT1176xxxA_M7?BankAddr=0x30000000&Loader=nCS@AD18_CLK@AD19_D0@AD20_D1@AD21_D2@AD22_D3@AD23&BankAddr=0x60000000&Loader=nCS@SDB100_CLK@SDB101_D0@SDB102_D1@SDB103_D2@SDB104_D3@SDB105"
 ```
@@ -111,7 +122,8 @@ After setting fuses, set the dip switch as follows:
 
 ## Debugging
 
-Before debugging, specify the appropriate device configuration in the [launch.json](../templates/launch.json) file. Refer to the [launch.json](../templates/launch.json) example provided. Follow the instructions on [debugging with VS-Code](../README.md/#debugging-with-vs-code).
+Before debugging, specify the appropriate device configuration in the [launch.json](../templates/launch.json) file.
+Refer to the [launch.json](../templates/launch.json) example provided. Follow the instructions on [debugging with VS-Code](../README.md/#debugging-with-vs-code).
 
 ## GDB-Server
 
@@ -121,13 +133,15 @@ Use GDB for independent loading and debugging targets from your IDE:
 - Select the connection via USB.
 - Select device `MIMXRT1176xxxA_M7` and set the endian to `Little Endian`.
 - Select `JTAG` as the interface with a fixed speed of 4000 kHz.
-  - __NOTE__: If debugging doesn't work as expected, you can try changing the interface to SWD and/or varying the interface speed.
-- Select the right flash bank for FlexSPI 1: 
+  - __NOTE__: If debugging doesn't work as expected, you can try changing the interface to SWD and/or varying the
+  interface speed.
+- Select the right flash bank for FlexSPI 1:
   - `nCS@AD18_CLK@AD19_D0@AD20_D1@AD21_D2@AD22_D3@AD23&BankAddr=0x60000000&Loader=nCS@SDB100_CLK@SDB101_D0@SDB102_D1@SDB103_D2@SDB104_D3@SDB105`
 - Further options are optional.
 - Then start gdb via CLI.
 - Follow the command for booting:
-  ```bat
+
+  ``` bat
   file <PATH.elf>
   target remote localhost:<port>
   monitor reset
@@ -162,15 +176,20 @@ To boot from the flash device, follow these steps:
 - After setting up the boot mode, establish a connection between the host computer and the target hardware via UART1.
 - Open the [Secure Provisioning Tool](#software-requirements).
 - Open the processor menu in the upper left corner and select the target processor `MIMXRT1176`.
-- Select UART as the connection type and set the COM port to the one used for the target hardware connection. The default baud rate setting of 115200 can be kept. Check the connection with the "Test Connection" button afterward.
+- Select UART as the connection type and set the COM port to the one used for the target hardware connection.
+  The default baud rate setting of 115200 can be kept. Check the connection with the "Test Connection" button afterward.
 - Now open the `Build image` tab right below the target processor in the upper left corner.
 - Select `OTP Configuration`.
 - The OTP Configuration menu opens and asks to read the current values from the target processor, select "Yes" here.
-- If the fuses can be read correctly, the status message "Successfully updated fuses values" is shown in the message area at the bottom of the "OTP Configuration" window.
-- If something went wrong, please check the connection to the target hardware and try to read the fuses again by clicking the "Read" button at the window bottom.
+- If the fuses can be read correctly, the status message "Successfully updated fuses values" is shown in the message
+  area at the bottom of the "OTP Configuration" window.
+- If something went wrong, please check the connection to the target hardware and try to read the fuses again by
+  clicking the "Read" button at the window bottom.
 - Now select the `fuse 0x9A0` from the Boot param section and select the wildcard on bit 10.
-- When clicking on the wildcard it changes from "*" to "1". The "Required value" should now be `0x400`.**Double-check these values**.
-  - __ATTENTION__: A **wrong setting** on `fuse 0x9A0` **leads to bricked target hardware** that can no longer boot from the QSPI NOR Flash.
+- When clicking on the wildcard it changes from "*" to "1". The "Required value" should now be `0x400`.
+  **Double-check these values**.
+  - __ATTENTION__: A **wrong setting** on `fuse 0x9A0` **leads to bricked target hardware** that can no longer boot
+  from the QSPI NOR Flash.
 
 - Select `Advanced Mode` in the bottom left corner.
 - Now click on `Burn`. Confirm.

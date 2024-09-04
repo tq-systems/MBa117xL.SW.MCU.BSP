@@ -2,21 +2,28 @@ demo_sdcard {#demo_sdcard}
 ===========
 
 ## Overview
-This example, `demo_sdcard`, demonstrates the usage of the SD Card. It initializes the card, logs the card information, performs read/write operations, and compares the read/write content for consistency. It also handles SD card detection and read-only mode efficiently.
+
+This example, `demo_sdcard`, demonstrates the usage of the SD Card. It initializes the card, logs the card information,
+performs read/write operations, and compares the read/write content for consistency. It also handles SD card detection
+and read-only mode efficiently.
 
 ## Supported Toolchain
+
 See [Requirements](../../README.md#requirements).
 
 ## Hardware Requirements
+
 - Mini/micro USB cable
 - SD Card
 - Personal Computer
 - Compatible board (as per the targeted board in your project)
 
 ## Board Settings
+
 No special settings are required for this demo.
 
 ## Demo Preparation
+
 1. Connect a USB cable between the PC host and the target board.
 2. Insert an SD Card into the card slot of the target board.
 3. Open a serial terminal on PC with the following settings:
@@ -29,9 +36,10 @@ No special settings are required for this demo.
 5. To begin running the demo, either press the reset button on your board or launch the debugger in your IDE.
 
 ## Running the Demo
+
 Upon successful execution, the following message will be displayed in the terminal:
 
-```
+``` txt
 
 TQ-Systems GmbH
 This is a demo application for the device <module-board>.
