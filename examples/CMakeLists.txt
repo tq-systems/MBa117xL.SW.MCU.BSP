@@ -7,11 +7,18 @@ list(APPEND CMAKE_MODULE_PATH "${BoardDirPath}/cmake")
 
 set(LINKER_FILE_RAM "${BoardDirPath}/MIMXRT1176xxxxx_cm7_ram.ld")
 set(LINKER_FILE_FLASH "${BoardDirPath}/MIMXRT1176xxxxx_cm7_flexspi_nor.ld")
+set(LINKER_FILE_SDRAM "${BoardDirPath}/MIMXRT1176xxxxx_cm7_flexspi_nor_sdram.ld")
 
 include(target)
 
+if(bootDisk STREQUAL "SD-Ram-Flash")
+ set(BOARD_SRCS ${BOARD_SRCS}
+    "${BoardDirPath}/dcd.c"
+    "${BoardDirPath}/dcd.h"
+ )
+endif()
 
-if(bootDisk STREQUAL "Flash")
+if(bootDisk STREQUAL "Flash" OR bootDisk STREQUAL "SD-Ram-Flash")
     set(BOARD_SRCS ${BOARD_SRCS} 
     "${BoardDirPath}/TQMa117xL_flexspi_nor_config.c"
     "${BoardDirPath}/TQMa117xL_flexspi_nor_config.h"
@@ -33,3 +40,5 @@ add_subdirectory(demo_usb)
 add_subdirectory(demo_PMIC)
 add_subdirectory(demo_spi_flash)
 add_subdirectory(demo_ethernet)
+if(bootDisk STREQUAL "SD-Ram-Flash")
+endif()

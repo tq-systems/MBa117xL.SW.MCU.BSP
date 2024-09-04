@@ -4,15 +4,25 @@ FPU_DEFINITION()
 BUILD_TYPE_DEF()
 SKIP_DCDC_ADJUSTMENT()
 
-if(bootDisk STREQUAL "Flash")
+if(bootDisk STREQUAL "Flash" OR bootDisk STREQUAL "SD-Ram-Flash")
     ENABLE_BOOT_HEADER()
+    USE_FLASH()
     if(bootDisk STREQUAL "Flash")
-        USE_FLASH()
         set( CMAKE_EXE_LINKER_FLAGS " \
             ${CMAKE_EXE_LINKER_FLAGS} \
             -T${LINKER_FILE_FLASH} -static \
         ")
+    else()
+        USE_SDRAM()
+        set(CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS} \
+            -D__STARTUP_INITIALIZE_RAMFUNCTION \
+        " )
+        set( CMAKE_EXE_LINKER_FLAGS " \
+            ${CMAKE_EXE_LINKER_FLAGS} \
+            -T${LINKER_FILE_SDRAM} -static \
+        ") 
     endif()
+
 else()
     set( CMAKE_EXE_LINKER_FLAGS " \
         ${CMAKE_EXE_LINKER_FLAGS} \

@@ -14,11 +14,16 @@ bootDisk:
       choices:
         ram:
           short: ram
-          long: ram
+          long: use *ram.ld linker file
           settings:
-           bootDisk: "Ram"
+           bootDisk: Ram
         flash:
           short: flash
-          long: flash
+          long: use *flexspi_nor.ld linker file
           settings:
            bootDisk: Flash
+        sd_ram:
+          short: sd_ram-flash
+          long: use *flexspi_nor_sdram.ld linker file
+          settings:
+           bootDisk: SD-Ram-Flash

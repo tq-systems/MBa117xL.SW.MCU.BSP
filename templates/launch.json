@@ -35,11 +35,6 @@
       "interface": "jtag",
       "executable": "${workspaceFolder}\\build\\dist\\Debug\\Ram\\TQMa1176xL_${input:app}.elf",
       "serverArgs": [
-        "-select",
-        "USB",
-        "-ir",
-        "-select",
-        "USB",
         "-endian",
         "little",
         "-LocalhostOnly",
@@ -47,7 +42,7 @@
         "4000"
       ],
       "postLaunchCommands": [
-        "target remote localhost:50003",
+        "target remote localhost:50000",
         "monitor reset",
         "monitor halt",
         "load"
@@ -64,11 +59,29 @@
       "interface": "jtag",
       "executable": "${workspaceFolder}\\build\\dist\\Debug\\Flash\\TQMa1176xL_${input:app}.elf",
       "serverArgs": [
-        "-select",
-        "USB",
-        "-ir",
-        "-select",
-        "USB",
+        "-endian",
+        "little",
+        "-LocalhostOnly",
+        "-speed",
+        "4000",
+        "-device",
+        "MIMXRT1176xxxA_M7?BankAddr=0x30000000&Loader=nCS@AD18_CLK@AD19_D0@AD20_D1@AD21_D2@AD22_D3@AD23&BankAddr=0x60000000&Loader=nCS@SDB100_CLK@SDB101_D0@SDB102_D1@SDB103_D2@SDB104_D3@SDB105"
+      ],
+      "postLaunchCommands": [
+        "monitor reset"
+      ]
+    },
+    {
+      "showDevDebugOutput": "both",
+      "type": "cortex-debug",
+      "request": "launch",
+      "name": "Debug J-Link SD-Ram-Flash",
+      "cwd": "${workspaceFolder}",
+      "servertype": "jlink",
+      "device": "MIMXRT1176xxxA_M7",
+      "interface": "jtag",
+      "executable": "${workspaceFolder}\\build\\dist\\Debug\\SD-Ram-Flash\\TQMa1176xL_${input:app}.elf",
+      "serverArgs": [
         "-endian",
         "little",
         "-LocalhostOnly",
