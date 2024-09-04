@@ -59,7 +59,7 @@ To clone the NXP's mcu-sdk repository using West, open a terminal and execute th
 ```
 pip install west
 cd  <project path>\dependencies
-west init -m https://github.com/NXPmicro/mcux-sdk --mr MCUX_2.14.0_UPDATE_ENHC1 mcuxsdk
+west init -m https://github.com/NXPmicro/mcux-sdk --mr MCUX_2.16.000 mcuxsdk
 cd mcuxsdk
 west update
 ```
