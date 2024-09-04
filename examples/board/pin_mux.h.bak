@@ -960,21 +960,11 @@ void BOARD_InitBootPins(void);
 #define BOARD_INITPINS_LPUART8_CTS_SIGNAL                            gpio_mux_io   /*!< Signal name */
 #define BOARD_INITPINS_LPUART8_CTS_CHANNEL                                    3U   /*!< Signal channel */
 
-/* Symbols to be used with GPIO driver */
-#define BOARD_INITPINS_LPUART8_CTS_GPIO                                    GPIO3   /*!< GPIO peripheral base pointer */
-#define BOARD_INITPINS_LPUART8_CTS_GPIO_PIN                                   3U   /*!< GPIO pin number */
-#define BOARD_INITPINS_LPUART8_CTS_GPIO_PIN_MASK                      (1U << 3U)   /*!< GPIO pin mask */
-
 /* GPIO_AD_05 (coord P13), RS485_UART_RTS / BLUETOOTH_UART_RTS */
 /* Routed pin properties */
 #define BOARD_INITPINS_LPUART8_RTS_PERIPHERAL                              GPIO3   /*!< Peripheral name */
 #define BOARD_INITPINS_LPUART8_RTS_SIGNAL                            gpio_mux_io   /*!< Signal name */
 #define BOARD_INITPINS_LPUART8_RTS_CHANNEL                                    4U   /*!< Signal channel */
-
-/* Symbols to be used with GPIO driver */
-#define BOARD_INITPINS_LPUART8_RTS_GPIO                                    GPIO3   /*!< GPIO peripheral base pointer */
-#define BOARD_INITPINS_LPUART8_RTS_GPIO_PIN                                   4U   /*!< GPIO pin number */
-#define BOARD_INITPINS_LPUART8_RTS_GPIO_PIN_MASK                      (1U << 4U)   /*!< GPIO pin mask */
 
 /* GPIO_AD_10 (coord R17), USB_OTG1_PWR/J26[2]/U26[A1] */
 /* Routed pin properties */
@@ -1003,11 +993,6 @@ void BOARD_InitBootPins(void);
 #define BOARD_INITPINS_SDHC1_CD_N_PERIPHERAL                           CM7_GPIO3   /*!< Peripheral name */
 #define BOARD_INITPINS_SDHC1_CD_N_SIGNAL                         gpio_mux_io_cm7   /*!< Signal name */
 #define BOARD_INITPINS_SDHC1_CD_N_CHANNEL                                    31U   /*!< Signal channel */
-
-/* Symbols to be used with GPIO driver */
-#define BOARD_INITPINS_SDHC1_CD_N_GPIO                                 CM7_GPIO3   /*!< GPIO peripheral base pointer */
-#define BOARD_INITPINS_SDHC1_CD_N_GPIO_PIN                                   31U   /*!< GPIO pin number */
-#define BOARD_INITPINS_SDHC1_CD_N_GPIO_PIN_MASK                      (1U << 31U)   /*!< GPIO pin mask */
 
 /* MIPI_DSI_DP1 (coord B10), MIPI_DSI_DP1/J48[9] */
 /* Routed pin properties */
