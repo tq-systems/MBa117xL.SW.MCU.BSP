@@ -63,13 +63,14 @@ static LPI2C_masterDevice_t i2c_master = {
 
 /*Portexpander for enabling IOT_MAIN_UART*/
 /*device configuration*/
-static PCA9555BS_Handle_t portExpander = {
-  .peripheral                     = &i2c_master,
-  .IO_Mask.PIN00_PIN07_Mask       = 0xF0,
-  .IO_Mask.PIN10_PIN17_Mask       = 0x3F,
-  .Polarity_Mask.PIN00_PIN07_Mask = 0x00,
-  .Polarity_Mask.PIN10_PIN17_Mask = 0x00,
-  .transferFunction               = PortExpandertransferFunction};
+static PCA9555BS_Handle_t portExpander = {.peripheral = &i2c_master,
+                                          .IOMask.PIN00_PIN07_Mask       = 0xF0,
+                                          .IOMask.PIN10_PIN17_Mask       = 0x00,
+                                          .PolarityMask.PIN00_PIN07_Mask = 0x00,
+                                          .PolarityMask.PIN10_PIN17_Mask = 0x00,
+                                          .OutputMask.PIN10_PIN17_Mask   = 0x00,
+                                          .transferFunction =
+                                            PortExpandertransferFunction};
 
 /*******************************************************************************
  * Callback functions
