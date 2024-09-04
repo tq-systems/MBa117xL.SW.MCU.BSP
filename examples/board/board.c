@@ -32,8 +32,15 @@
 #endif
 
 /*******************************************************************************
+ * Define
+ ******************************************************************************/
+
+#define BOARD_I2C_PMIC_BOOT_CLOCK_FREQUENCY 24000000UL
+
+/*******************************************************************************
  * Variables
  ******************************************************************************/
+
 /*******************************************************************************
  * Code
  ******************************************************************************/
@@ -667,9 +674,16 @@ void BOARD_ConfigMPU(void)
  * overdrive-mode */
 static void BOARD_configurePMIC()
 {
+  /* Set root clock to 48MHz OSC with the Div2 because it always runs with
+   * startup.*/
+  clock_root_config_t rootCfg = {0};
+  rootCfg.mux                 = kCLOCK_LPI2C6_ClockRoot_MuxOscRc48MDiv2;
+  rootCfg.div                 = 1;
+  CLOCK_SetRootClock(kCLOCK_Root_Lpi2c6, &rootCfg);
+
   lpi2c_master_config_t masterConfig;
   LPI2C_MasterGetDefaultConfig(&masterConfig);
-  LPI2C_MasterInit(LPI2C6, &masterConfig, BOARD_BOOTCLOCKRUN_LPI2C6_CLK_ROOT);
+  LPI2C_MasterInit(LPI2C6, &masterConfig, BOARD_I2C_PMIC_BOOT_CLOCK_FREQUENCY);
   PMIC_setCoreVoltage(PMIC_VDD_SOC_1V100);
   LPI2C_MasterDeinit(LPI2C6);
 }
@@ -688,9 +702,10 @@ void BOARD_MMC_Pin_Config(uint32_t speed, uint32_t strength)
 
 void BOARD_Initialize(void)
 {
-  BOARD_ConfigMPU();
   BOARD_InitBootPins();
-  BOARD_BootClockRUN();
-  BOARD_configurePMIC();
   BOARD_InitDebugConsole();
+  BOARD_configurePMIC();
+
+  BOARD_ConfigMPU();
+  BOARD_BootClockRUN();
 }
