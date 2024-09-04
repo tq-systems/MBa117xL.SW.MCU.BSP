@@ -66,13 +66,13 @@ static I2C_masterDevice_t i2c_master = {
 #endif
 
 /* Device configuration */
-static PCA9555BS_Handle_t portExpander = {
-  .IO_Mask.PIN00_PIN07_Mask       = 0xF0,
-  .IO_Mask.PIN10_PIN17_Mask       = 0x00,
-  .Polarity_Mask.PIN00_PIN07_Mask = 0x00,
-  .Polarity_Mask.PIN10_PIN17_Mask = 0x00,
-  .transferFunction               = PCA9555BS_TransferFunction,
-  .peripheral                     = &i2c_master};
+static PCA9555BS_Handle_t portExpander = {.IOMask.PIN00_PIN07_Mask       = 0xF0,
+                                          .IOMask.PIN10_PIN17_Mask       = 0x00,
+                                          .PolarityMask.PIN00_PIN07_Mask = 0x00,
+                                          .PolarityMask.PIN10_PIN17_Mask = 0x00,
+                                          .transferFunction =
+                                            PCA9555BS_TransferFunction,
+                                          .peripheral = &i2c_master};
 
 /*******************************************************************************
  * Code
@@ -172,29 +172,28 @@ static uint32_t PCA9555BS_TransferFunction(
  */
 static void execute_digital_loopback(void)
 {
-  uint8_t     OutputSetting;
   uint8_t     expectedInputs[] = {0x01, 0x02, 0x04, 0x08};
   const char *ioNames[] = {"Digital IO 1", "Digital IO 2", "Digital IO 3",
                            "Digital IO 4"};
 
   for (uint8_t i = 0; i < 4; i++)
   {
-    OutputSetting = expectedInputs[i];
+    portExpander.OutputMask.PIN00_PIN07_Mask = expectedInputs[i];
 
     // Write the output setting to the port expander.
-    PCA9555BS_writeRegister(PORTEXP_DATA0_REG, &OutputSetting, &portExpander);
+    PCA9555BS_setOutput(&portExpander);
     // Allow IO settling time after changing the output setting.
     SDK_DelayAtLeastUs(20000, SystemCoreClock);
 
     // Check the state of each digital input pin.
     if (GPIO_ReadPinInput(DIG_IN_1_GPIO, DIG_IN_1_GPIO_PIN)
-          == ((OutputSetting & 0x01) >> 0)
+          == ((portExpander.OutputMask.PIN00_PIN07_Mask & 0x01) >> 0)
         && GPIO_ReadPinInput(DIG_IN_1_GPIO, DIG_IN_2_GPIO_PIN)
-             == ((OutputSetting & 0x02) >> 1)
+             == ((portExpander.OutputMask.PIN00_PIN07_Mask & 0x02) >> 1)
         && GPIO_ReadPinInput(DIG_IN_1_GPIO, DIG_IN_3_GPIO_PIN)
-             == ((OutputSetting & 0x04) >> 2)
+             == ((portExpander.OutputMask.PIN00_PIN07_Mask & 0x04) >> 2)
         && GPIO_ReadPinInput(DIG_IN_1_GPIO, DIG_IN_4_GPIO_PIN)
-             == ((OutputSetting & 0x08) >> 3))
+             == ((portExpander.OutputMask.PIN00_PIN07_Mask & 0x08) >> 3))
     {
       PRINTF("[ OK ]\t%s Loopback\r\n", ioNames[i]);
     }

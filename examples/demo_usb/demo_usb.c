@@ -95,13 +95,13 @@ static LPI2C_masterDevice_t i2c_portexpader = {
 };
 
 /* Portexpander for enabling USB_MAIN_UART */
-static PCA9555BS_Handle_t portExpander = {
-  .peripheral                     = &i2c_portexpader,
-  .IO_Mask.PIN00_PIN07_Mask       = 0xF0,
-  .IO_Mask.PIN10_PIN17_Mask       = 0x3F,
-  .Polarity_Mask.PIN00_PIN07_Mask = 0x00,
-  .Polarity_Mask.PIN10_PIN17_Mask = 0x00,
-  .transferFunction               = PortExpander_transferFunction};
+static PCA9555BS_Handle_t portExpander = {.peripheral = &i2c_portexpader,
+                                          .IOMask.PIN00_PIN07_Mask       = 0xF0,
+                                          .IOMask.PIN10_PIN17_Mask       = 0x00,
+                                          .PolarityMask.PIN00_PIN07_Mask = 0x00,
+                                          .PolarityMask.PIN10_PIN17_Mask = 0x00,
+                                          .transferFunction =
+                                            PortExpander_transferFunction};
 
 /*******************************************************************************
  * Code
@@ -335,14 +335,17 @@ int main(void)
                    LPI2C_CLOCK_FREQUENCY);
   PCA9555BS_configure(&portExpander);
 
-  /* Enable UART bridge */
-  portExpander.IO_Mask.PIN10_PIN17_Mask = 0xBF;
-  PCA9555BS_configPortsIO(&portExpander);
+  /*Toggle USB*/
+  portExpander.OutputMask.PIN10_PIN17_Mask = 0x1;
+  PCA9555BS_setOutput(&portExpander);
   SDK_DelayAtLeastUs(50000, SystemCoreClock);
-  portExpander.IO_Mask.PIN10_PIN17_Mask = 0x3F;
-  PCA9555BS_configPortsIO(&portExpander);
+  portExpander.OutputMask.PIN10_PIN17_Mask = 0x0;
+  PCA9555BS_setOutput(&portExpander);
   SDK_DelayAtLeastUs(50000, SystemCoreClock);
   PRINTF("\r\n[ OK ]\t Toggle done. \r\n");
+  /* Enable UART bridge */
+  portExpander.OutputMask.PIN10_PIN17_Mask = 0x01;
+  PCA9555BS_setOutput(&portExpander);
 
   USB_HostApplicationInit();
 

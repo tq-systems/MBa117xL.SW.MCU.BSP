@@ -24,9 +24,14 @@
  * instructions for each parameter are provided in the documentation. Prior to
  * using the driver, it's essential to initialize all peripherals that interface
  * with the target device.
- * Once initialization is complete, call the "PCA9555BS_configure" function to
- * set your desired configuration set in the handle structure. For further
- * operation consult the documentation in the functions.
+ * First configure the IO mode of the respective pins using the
+ * "PCA9555BS_PIN_IOConfig_t". 0 means output and 1 input.
+ * Use "PCA9555BS_PinPolarity_t" or "PCA9555BS_OutputState_t" for configuring
+ * either the polarty of the input or the state of the output for the respective
+ * pin.
+ * Once the handle is set, call the "PCA9555BS_configure" function to
+ * set your desired configuration set in the handle structure.
+ * Consult the documentation of the driver's functions for more details.
  */
 
 #ifndef PCA9555BS_H_
@@ -94,9 +99,6 @@
 /*Configuration Port 1 Register*/
 #define PORTEXP_CONFIGPORT1_REG 0x07
 
-#define PORTEXP_DATA0_REG 0x02
-#define PORTEXP_DATA1_REG 0x03
-
 /*I2C Transfer Buffer Size*/
 #define PORTEXP_BUFFER_SIZE 3
 
@@ -105,24 +107,38 @@
  * This structure holds the masks used to configure the I/O settings
  * for each 8-bit port of the PCA9555BS.
  */
-typedef struct PCA9555BS_PIN_IOConfig
+typedef struct PCA9555BS_PinIOConfig
 {
   uint8_t PIN00_PIN07_Mask; /**< Mask for configuring pins P0_0 to P0_7.*/
   uint8_t PIN10_PIN17_Mask; /**< Mask for configuring pins P1_0 to P1_7.*/
-} PCA9555BS_PIN_IOConfig_t;
+} PCA9555BS_PinIOConfig_t;
 
 /*!
  * \brief Configuration for polarity of PCA9555BS pins.
  * This structure holds the masks used to configure the polarity settings
  * for each 8-bit port of the PCA9555BS.
  */
-typedef struct PCA9555BS_PIN_Polarity
+typedef struct PCA9555BS_PinPolarity
 {
   uint8_t
     PIN00_PIN07_Mask; /**< Mask for configuring polarity of pins P0_0 to P0_7.*/
   uint8_t
     PIN10_PIN17_Mask; /**< Mask for configuring polarity of pins P1_0 to P1_7.*/
-} PCA9555BS_PIN_Polarity_t;
+} PCA9555BS_PinPolarity_t;
+
+/*!
+ * \brief Configuration for output of PCA9555BS pins.
+ * This structure holds the masks used to configure the output state
+ * for each 8-bit port of the PCA9555BS. This only works if IOConfig is set to 0
+ * for the respective pins.
+ */
+typedef struct PCA9555BS_OutputState
+{
+  uint8_t
+    PIN00_PIN07_Mask; /**< Mask for configuring output of pins P0_0 to P0_7.*/
+  uint8_t
+    PIN10_PIN17_Mask; /**< Mask for configuring output of pins P1_0 to P1_7.*/
+} PCA9555BS_OutputState_t;
 
 /*!
  * \brief Enumerates the possible directions for data transfer with the
@@ -171,20 +187,24 @@ typedef uint32_t (*PCA9555BS_TransferFunction_t)(
 typedef struct PCA9555BS_Handle
 {
   void *peripheral; /**< Pointer to the I2C peripheral object.*/
-  PCA9555BS_PIN_IOConfig_t
-    IO_Mask; /**< Mask used for configuring PINs as input or output.
-              * - Bit = 1: Corresponding pin is configured as input.
-              * - Bit = 0: Corresponding pin is configured as output.
-              * Example: 0b00001111 will configure P0_0 to P0_3 as outputs
-              * and P0_4 to P0_7 as inputs.*/
-  PCA9555BS_PIN_Polarity_t
-    Polarity_Mask; /**< Mask used for configuring PINs polarity.
-                    * - Bit = 1: Inverts the polarity of the corresponding
-                    * input pin.
-                    * - Bit = 0: Retains the original polarity of the
-                    * corresponding input pin. Example: 0b00000001 will invert
-                    * the polarity of P0_0 and retain the polarity for other
-                    * pins.*/
+  PCA9555BS_PinIOConfig_t
+    IOMask; /**< Mask used for configuring PINs as input or output.
+             * - Bit = 1: Corresponding pin is configured as input.
+             * - Bit = 0: Corresponding pin is configured as output.
+             * Example: 0b00001111 will configure P0_0 to P0_3 as outputs
+             * and P0_4 to P0_7 as inputs.*/
+  PCA9555BS_PinPolarity_t
+    PolarityMask; /**< Mask used for configuring PINs polarity.
+                   * - Bit = 1: Inverts the polarity of the corresponding
+                   * input pin.
+                   * - Bit = 0: Retains the original polarity of the
+                   * corresponding input pin. Example: 0b00000001 will invert
+                   * the polarity of P0_0 and retain the polarity for other
+                   * pins.*/
+  PCA9555BS_OutputState_t
+    OutputMask; /**< Mask used for configuring PINs output state.
+                 * - Bit = 1: Sets output to high.
+                 * - Bit = 0: Sets output to low.*/
   PCA9555BS_TransferFunction_t
     transferFunction; /**< Callback function for handling data transfer
                        * operations with the port expander.*/
@@ -209,6 +229,8 @@ extern uint32_t PCA9555BS_writeRegister(uint8_t registerAddress, uint8_t *value,
 
 extern uint32_t PCA9555BS_readRegister(uint8_t registerAddress, uint8_t *buffer,
                                        PCA9555BS_Handle_t *handle);
+
+extern uint32_t PCA9555BS_setOutput(PCA9555BS_Handle_t *handle);
 
 /*!@}*/
 

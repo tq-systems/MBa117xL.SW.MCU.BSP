@@ -13,8 +13,8 @@
  */
 //******************************************************************************
 
-#ifndef ENET_LWIP_ENET_QOS_SRC_ENET_QOS_FUNC_H_
-#define ENET_LWIP_ENET_QOS_SRC_ENET_QOS_FUNC_H_
+#ifndef DEMO_ENTHERNET_H_
+#define DEMO_ENTHERNET_H_
 
 /*******************************************************************************
  * Defines
@@ -38,16 +38,12 @@
 #define configGW_ADDR3 1
 
 /* MAC address configuration. */
+#ifndef configMAC_ADDR
 #define configMAC_ADDR                                                         \
   {                                                                            \
     0x02, 0x12, 0x13, 0x10, 0x15, 0x11                                         \
   }
-
-/* Address of PHY interface. */
-#define EXAMPLE_PHY_ADDRESS 0x04U // 0x01U
-
-/* MDIO operations. */
-#define EXAMPLE_MDIO_OPS enet_qos_ops
+#endif
 
 /* PHY operations. */
 #define EXAMPLE_PHY_OPS &phydp83867_ops
@@ -61,11 +57,6 @@
 #define ENET_PRIORITY (6U)
 #endif
 
-#ifndef EXAMPLE_NETIF_INIT_FN
-/*! @brief Network interface initialization function. */
-#define EXAMPLE_NETIF_INIT_FN ethernetif0_init
-#endif /* EXAMPLE_NETIF_INIT_FN */
-
 /*! @brief Stack size of the temporary lwIP initialization thread. */
 #define INIT_THREAD_STACKSIZE 1024
 
@@ -78,6 +69,6 @@
 
 /******************************************************************************/
 
-#endif /* ENET_LWIP_ENET_QOS_SRC_ENET_QOS_FUNC_H_ */
+#endif /* DEMO_ENTHERNET_H_ */
 
 /*[EOF]************************************************************************/

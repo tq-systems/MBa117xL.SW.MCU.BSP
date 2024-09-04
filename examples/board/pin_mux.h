@@ -960,11 +960,21 @@ void BOARD_InitBootPins(void);
 #define BOARD_INITPINS_LPUART8_CTS_SIGNAL                            gpio_mux_io   /*!< Signal name */
 #define BOARD_INITPINS_LPUART8_CTS_CHANNEL                                    3U   /*!< Signal channel */
 
+/* Symbols to be used with GPIO driver */
+#define BOARD_INITPINS_LPUART8_CTS_GPIO                                    GPIO3   /*!< GPIO peripheral base pointer */
+#define BOARD_INITPINS_LPUART8_CTS_GPIO_PIN                                   3U   /*!< GPIO pin number */
+#define BOARD_INITPINS_LPUART8_CTS_GPIO_PIN_MASK                      (1U << 3U)   /*!< GPIO pin mask */
+
 /* GPIO_AD_05 (coord P13), RS485_UART_RTS / BLUETOOTH_UART_RTS */
 /* Routed pin properties */
 #define BOARD_INITPINS_LPUART8_RTS_PERIPHERAL                              GPIO3   /*!< Peripheral name */
 #define BOARD_INITPINS_LPUART8_RTS_SIGNAL                            gpio_mux_io   /*!< Signal name */
 #define BOARD_INITPINS_LPUART8_RTS_CHANNEL                                    4U   /*!< Signal channel */
+
+/* Symbols to be used with GPIO driver */
+#define BOARD_INITPINS_LPUART8_RTS_GPIO                                    GPIO3   /*!< GPIO peripheral base pointer */
+#define BOARD_INITPINS_LPUART8_RTS_GPIO_PIN                                   4U   /*!< GPIO pin number */
+#define BOARD_INITPINS_LPUART8_RTS_GPIO_PIN_MASK                      (1U << 4U)   /*!< GPIO pin mask */
 
 /* GPIO_AD_10 (coord R17), USB_OTG1_PWR/J26[2]/U26[A1] */
 /* Routed pin properties */
@@ -993,6 +1003,45 @@ void BOARD_InitBootPins(void);
 #define BOARD_INITPINS_SDHC1_CD_N_PERIPHERAL                           CM7_GPIO3   /*!< Peripheral name */
 #define BOARD_INITPINS_SDHC1_CD_N_SIGNAL                         gpio_mux_io_cm7   /*!< Signal name */
 #define BOARD_INITPINS_SDHC1_CD_N_CHANNEL                                    31U   /*!< Signal channel */
+
+/* Symbols to be used with GPIO driver */
+#define BOARD_INITPINS_SDHC1_CD_N_GPIO                                 CM7_GPIO3   /*!< GPIO peripheral base pointer */
+#define BOARD_INITPINS_SDHC1_CD_N_GPIO_PIN                                   31U   /*!< GPIO pin number */
+#define BOARD_INITPINS_SDHC1_CD_N_GPIO_PIN_MASK                      (1U << 31U)   /*!< GPIO pin mask */
+
+/* MIPI_DSI_DP1 (coord B10), MIPI_DSI_DP1/J48[9] */
+/* Routed pin properties */
+#define BOARD_INITPINS_MIPI_DSI_DP1_PERIPHERAL                          DSI_HOST   /*!< Peripheral name */
+#define BOARD_INITPINS_MIPI_DSI_DP1_SIGNAL                                    DP   /*!< Signal name */
+#define BOARD_INITPINS_MIPI_DSI_DP1_CHANNEL                                   1U   /*!< Signal channel */
+
+/* MIPI_DSI_DN1 (coord A10), MIPI_DSI_DN1/J48[8] */
+/* Routed pin properties */
+#define BOARD_INITPINS_MIPI_DSI_DN1_PERIPHERAL                          DSI_HOST   /*!< Peripheral name */
+#define BOARD_INITPINS_MIPI_DSI_DN1_SIGNAL                                    DN   /*!< Signal name */
+#define BOARD_INITPINS_MIPI_DSI_DN1_CHANNEL                                   1U   /*!< Signal channel */
+
+/* MIPI_DSI_CKP (coord B9), MIPI_DSI_CLKP/J48[12] */
+/* Routed pin properties */
+#define BOARD_INITPINS_MIPI_DSI_CLKP_PERIPHERAL                         DSI_HOST   /*!< Peripheral name */
+#define BOARD_INITPINS_MIPI_DSI_CLKP_SIGNAL                                 CLKP   /*!< Signal name */
+
+/* MIPI_DSI_CKN (coord A9), MIPI_DSI_CLKN/J48[11] */
+/* Routed pin properties */
+#define BOARD_INITPINS_MIPI_DSI_CLKN_PERIPHERAL                         DSI_HOST   /*!< Peripheral name */
+#define BOARD_INITPINS_MIPI_DSI_CLKN_SIGNAL                                 CLKN   /*!< Signal name */
+
+/* MIPI_DSI_DP0 (coord B8), MIPI_DSI_DP0/J48[6] */
+/* Routed pin properties */
+#define BOARD_INITPINS_MIPI_DSI_DP0_PERIPHERAL                          DSI_HOST   /*!< Peripheral name */
+#define BOARD_INITPINS_MIPI_DSI_DP0_SIGNAL                                    DP   /*!< Signal name */
+#define BOARD_INITPINS_MIPI_DSI_DP0_CHANNEL                                   0U   /*!< Signal channel */
+
+/* MIPI_DSI_DN0 (coord A8), MIPI_DSI_DN0/J48[5] */
+/* Routed pin properties */
+#define BOARD_INITPINS_MIPI_DSI_DN0_PERIPHERAL                          DSI_HOST   /*!< Peripheral name */
+#define BOARD_INITPINS_MIPI_DSI_DN0_SIGNAL                                    DN   /*!< Signal name */
+#define BOARD_INITPINS_MIPI_DSI_DN0_CHANNEL                                   0U   /*!< Signal channel */
 
 /*!
  * @brief Configures pin routing and optionally pin electrical features.
