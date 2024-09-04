@@ -11,7 +11,21 @@ Releases are named with the following scheme:
 
 First release.
 
-# [MBa117xL.SW.MCU.BSP.0002] - 2024-01-08
+## [MBa117xL.SW.MCU.BSP.0002] - 2024-09-09
 
-## Changed:
- * Improved documentation.
+### Changed
+
+* Improved documentation.
+* PMIC Initialization.
+* SDK update to 2.16.000.
+* Beautified build environment.
+
+### Added
+
+* external RAM support
+* Ethernet 1G
+* Display DSI
+
+### Fixed
+
+* Port Expander: had issues while setting the output
