@@ -1,22 +1,20 @@
-project(demo_ethernet)
+project(demo_ethernet_1g)
 
 set(MCUX_SDK_PROJECT_NAME ${BOARD_NAME}_${PROJECT_NAME}.elf)
 
 include(flags)
 
 add_executable(${MCUX_SDK_PROJECT_NAME} 
-${BOARD_SRCS}
-"${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.c"
-"${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.h"
-"${CMAKE_CURRENT_SOURCE_DIR}/lwipopts.h"
-"${TQ_DRIVERS_PATH}/NXP_API/DP83867.c"
-"${TQ_DRIVERS_PATH}/NXP_API/DP83867.h"
+    ${BOARD_SRCS}
+    "${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.c"
+    "${TQ_DRIVERS_PATH}/NXP_API/DP83867.c"
+    "${TQ_DRIVERS_PATH}/NXP_API/DP83867.h"
 )
 
 target_include_directories(${MCUX_SDK_PROJECT_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
-    ${CMAKE_SOURCE_DIR}/demo_apps/
     ${BoardDirPath}
+    ${BoardDirPath}/ethernet/
     ${TQ_DRIVERS_PATH}/NXP_API/
 )
 
@@ -29,8 +27,6 @@ include(global_include)
 list(APPEND CMAKE_MODULE_PATH ${MCUXSDK_ROOT}/core/components/silicon_id/socs/imxrt1170)
 
 # include modules
-
-include(driver_phy-device-rtl8211f)
 
 include(component_silicon_id)
 
@@ -46,7 +42,7 @@ include(middleware_lwip)
 
 include(driver_phy-common)
 
-include(driver_enet_qos)
+include(driver_enet)
 
 include(driver_clock)
 
@@ -71,6 +67,8 @@ include(driver_iomuxc)
 include(utility_assert)
 
 include(driver_igpio)
+
+include(component_igpio_adapter)
 
 include(driver_xip_device)
 
@@ -102,4 +100,4 @@ target_link_libraries(${MCUX_SDK_PROJECT_NAME} PRIVATE ${TARGET_LINK_SYSTEM_LIBR
 target_link_libraries(${MCUX_SDK_PROJECT_NAME} PRIVATE -Wl,--end-group)
 
 add_custom_command(TARGET ${MCUX_SDK_PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_OBJCOPY}
--Obinary $<TARGET_FILE:${MCUX_SDK_PROJECT_NAME}> $<TARGET_FILE_DIR:${MCUX_SDK_PROJECT_NAME}>/${PROJECT_NAME}.bin)
+-Obinary $<TARGET_FILE:${MCUX_SDK_PROJECT_NAME}> $<TARGET_FILE_DIR:${MCUX_SDK_PROJECT_NAME}>/${BOARD_NAME}_${PROJECT_NAME}.bin)

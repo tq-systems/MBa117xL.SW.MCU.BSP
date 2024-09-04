@@ -67,8 +67,8 @@
  * LWIP_ALLOW_MEM_FREE_FROM_OTHER_CONTEXT=1: we need to free PBUF_RAM pbufs
  * from ISR context on LPC.
  */
-#if defined( FSL_FEATURE_SOC_LPC_ENET_COUNT ) &&                               \
-  ( FSL_FEATURE_SOC_LPC_ENET_COUNT > 0 )
+#if defined(FSL_FEATURE_SOC_LPC_ENET_COUNT)                                    \
+  && (FSL_FEATURE_SOC_LPC_ENET_COUNT > 0)
 #ifndef LWIP_ALLOW_MEM_FREE_FROM_OTHER_CONTEXT
 #define LWIP_ALLOW_MEM_FREE_FROM_OTHER_CONTEXT 1
 #endif
@@ -81,16 +81,16 @@
 #if !NO_SYS
 #define LWIP_TCPIP_CORE_LOCKING 1
 
-void sys_lock_tcpip_core( void );
+void sys_lock_tcpip_core(void);
 #define LOCK_TCPIP_CORE() sys_lock_tcpip_core()
 
-void sys_unlock_tcpip_core( void );
+void sys_unlock_tcpip_core(void);
 #define UNLOCK_TCPIP_CORE() sys_unlock_tcpip_core()
 
-void sys_mark_tcpip_thread( void );
+void sys_mark_tcpip_thread(void);
 #define LWIP_MARK_TCPIP_THREAD() sys_mark_tcpip_thread()
 #endif
-void sys_check_core_locking( void );
+void sys_check_core_locking(void);
 #define LWIP_ASSERT_CORE_LOCKED() sys_check_core_locking()
 
 /* ---------- Memory options ---------- */
@@ -108,7 +108,7 @@ void sys_check_core_locking( void );
  * a lot of data that needs to be copied, this should be set high.
  */
 #ifndef MEM_SIZE
-#define MEM_SIZE ( 30 * 1024 ) //(22*1024)
+#define MEM_SIZE (30 * 1024) //(22*1024)
 #endif
 
 /* MEMP_NUM_PBUF: the number of memp struct pbufs. If the application
@@ -176,24 +176,23 @@ void sys_check_core_locking( void );
 /* TCP Maximum segment size. */
 #ifndef TCP_MSS
 #define TCP_MSS                                                                \
-  ( 1500 -                                                                     \
-    40 ) /* TCP_MSS = (Ethernet MTU - IP header size - TCP header size) */
+  (1500 - 40) /* TCP_MSS = (Ethernet MTU - IP header size - TCP header size) */
 #endif
 
 /* TCP sender buffer space (bytes). */
 #ifndef TCP_SND_BUF
-#define TCP_SND_BUF ( 6 * TCP_MSS ) // 2
+#define TCP_SND_BUF (6 * TCP_MSS) // 2
 #endif
 
 /* TCP sender buffer space (pbufs). This must be at least = 2 *
    TCP_SND_BUF/TCP_MSS for things to work. */
 #ifndef TCP_SND_QUEUELEN
-#define TCP_SND_QUEUELEN ( 3 * TCP_SND_BUF ) / TCP_MSS // 6
+#define TCP_SND_QUEUELEN (3 * TCP_SND_BUF) / TCP_MSS // 6
 #endif
 
 /* TCP receive window. */
 #ifndef TCP_WND
-#define TCP_WND ( 2 * TCP_MSS )
+#define TCP_WND (2 * TCP_MSS)
 #endif
 
 /* Enable backlog*/
@@ -360,11 +359,11 @@ hardware:
  */
 #define DEFAULT_ACCEPTMBOX_SIZE 12
 
-#if ( LWIP_DNS || LWIP_IGMP || LWIP_IPV6 ) && !defined( LWIP_RAND )
+#if (LWIP_DNS || LWIP_IGMP || LWIP_IPV6) && !defined(LWIP_RAND)
 /* When using IGMP or IPv6, LWIP_RAND() needs to be defined to a random-function
  * returning an u32_t random value*/
 #include "lwip/arch.h"
-u32_t lwip_rand( void );
+u32_t lwip_rand(void);
 #define LWIP_RAND() lwip_rand()
 #endif
 

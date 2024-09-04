@@ -19,7 +19,8 @@
         "demo_PMIC",
         "demo_spi_flash",
         "demo_SE97BTP",
-        "demo_ethernet"
+        "demo_ethernet_qos",
+        "demo_ethernet_1g"
       ]
     }
   ],
