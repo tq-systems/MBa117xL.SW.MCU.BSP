@@ -12,11 +12,11 @@
 
 /* TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
 !!GlobalInfo
-product: Clocks v12.0
+product: Clocks v14.0
 processor: MIMXRT1176xxxxx
 package_id: MIMXRT1176DVMAA
 mcu_data: ksdk2_0
-processor_version: 14.0.1
+processor_version: 16.3.0
 board: MIMXRT1170-EVK
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
 
@@ -53,9 +53,9 @@ outputs:
 - {id: ACMP_CLK_ROOT.outFreq, value: 24 MHz}
 - {id: ADC1_CLK_ROOT.outFreq, value: 24 MHz}
 - {id: ADC2_CLK_ROOT.outFreq, value: 24 MHz}
-- {id: ARM_PLL_CLK.outFreq, value: 792 MHz}
+- {id: ARM_PLL_CLK.outFreq, value: 960 MHz}
 - {id: ASRC_CLK_ROOT.outFreq, value: 24 MHz}
-- {id: AXI_CLK_ROOT.outFreq, value: 792 MHz}
+- {id: AXI_CLK_ROOT.outFreq, value: 960 MHz}
 - {id: BUS_CLK_ROOT.outFreq, value: 240 MHz}
 - {id: BUS_LPSR_CLK_ROOT.outFreq, value: 160 MHz}
 - {id: CAN1_CLK_ROOT.outFreq, value: 24 MHz}
@@ -125,7 +125,7 @@ outputs:
 - {id: LPUART9_CLK_ROOT.outFreq, value: 24 MHz}
 - {id: M4_CLK_ROOT.outFreq, value: 240 MHz}
 - {id: M4_SYSTICK_CLK_ROOT.outFreq, value: 24 MHz}
-- {id: M7_CLK_ROOT.outFreq, value: 792 MHz}
+- {id: M7_CLK_ROOT.outFreq, value: 960 MHz}
 - {id: M7_SYSTICK_CLK_ROOT.outFreq, value: 100 kHz}
 - {id: MIC_CLK_ROOT.outFreq, value: 24 MHz}
 - {id: MIPI_DSI_TX_CLK_ESC_ROOT.outFreq, value: 24 MHz}
@@ -167,14 +167,13 @@ outputs:
 - {id: USDHC1_CLK_ROOT.outFreq, value: 24 MHz}
 - {id: USDHC2_CLK_ROOT.outFreq, value: 24 MHz}
 settings:
-- {id: LPSRDomainVoltage, value: OD}
 - {id: SOCDomainVoltage, value: OD}
 - {id: SemcConfigurationPatchConfig, value: disabled}
 - {id: ANADIG_OSC_OSC_24M_CTRL_LP_EN_CFG, value: Low}
 - {id: ANADIG_OSC_OSC_24M_CTRL_OSC_EN_CFG, value: Enabled}
 - {id: ANADIG_PLL.ARM_PLL_POST_DIV.scale, value: '2', locked: true}
 - {id: ANADIG_PLL.ARM_PLL_PREDIV.scale, value: '1', locked: true}
-- {id: ANADIG_PLL.ARM_PLL_VDIV.scale, value: '66', locked: true}
+- {id: ANADIG_PLL.ARM_PLL_VDIV.scale, value: '160', locked: true}
 - {id: ANADIG_PLL.PLL_AUDIO_BYPASS.sel, value: ANADIG_OSC.OSC_24M}
 - {id: ANADIG_PLL.PLL_VIDEO.denom, value: '960000'}
 - {id: ANADIG_PLL.PLL_VIDEO.div, value: '41'}
@@ -198,6 +197,7 @@ settings:
 - {id: ANADIG_PLL_SYS_PLL2_CTRL_POWERUP_CFG, value: Enabled}
 - {id: ANADIG_PLL_SYS_PLL3_CTRL_POWERUP_CFG, value: Enabled}
 - {id: ANADIG_PLL_SYS_PLL3_CTRL_SYS_PLL3_DIV2_CFG, value: Enabled}
+- {id: CCM.CLOCK_GROUP0_DIV0.scale, value: '1', locked: true}
 - {id: CCM.CLOCK_ROOT0.DIV.scale, value: '1', locked: true}
 - {id: CCM.CLOCK_ROOT0.MUX.sel, value: ANADIG_PLL.ARM_PLL_CLK}
 - {id: CCM.CLOCK_ROOT1.DIV.scale, value: '2', locked: true}
@@ -237,7 +237,7 @@ settings:
 const clock_arm_pll_config_t armPllConfig_BOARD_BootClockRUN = {
   .postDivider = kCLOCK_PllPostDiv2, /* Post divider, 0 - DIV by 2, 1 - DIV by
                                         4, 2 - DIV by 8, 3 - DIV by 1 */
-  .loopDivider = 132, /* PLL Loop divider, Fout = Fin * ( loopDivider / ( 2 *
+  .loopDivider = 160, /* PLL Loop divider, Fout = Fin * ( loopDivider / ( 2 *
                          postDivider ) ) */
 };
 
@@ -332,7 +332,6 @@ void BOARD_BootClockRUN(void)
 
   /* Init OSC RC 400M */
   CLOCK_OSC_EnableOscRc400M();
-  CLOCK_OSC_GateOscRc400M(false);
 
   /* Init OSC RC 48M */
   CLOCK_OSC_EnableOsc48M(true);
@@ -350,19 +349,22 @@ void BOARD_BootClockRUN(void)
   {
   }
 
-  /* Swicth both core, M7 Systick and Bus_Lpsr to OscRC48MDiv2 first */
+  /* Switch core M7 clock root to OscRC48MDiv2 first */
   rootCfg.mux = kCLOCK_M7_ClockRoot_MuxOscRc48MDiv2;
   rootCfg.div = 1;
   CLOCK_SetRootClock(kCLOCK_Root_M7, &rootCfg);
 
+  /* Switch core M7 systick clock root to OscRC48MDiv2 first */
   rootCfg.mux = kCLOCK_M7_SYSTICK_ClockRoot_MuxOscRc48MDiv2;
   rootCfg.div = 1;
   CLOCK_SetRootClock(kCLOCK_Root_M7_Systick, &rootCfg);
 
+  /* Switch core M4 clock root to OscRC48MDiv2 first */
   rootCfg.mux = kCLOCK_M4_ClockRoot_MuxOscRc48MDiv2;
   rootCfg.div = 1;
   CLOCK_SetRootClock(kCLOCK_Root_M4, &rootCfg);
 
+  /* Switch the Bus_Lpsr clock root to OscRC48MDiv2 first */
   rootCfg.mux = kCLOCK_BUS_LPSR_ClockRoot_MuxOscRc48MDiv2;
   rootCfg.div = 1;
   CLOCK_SetRootClock(kCLOCK_Root_Bus_Lpsr, &rootCfg);

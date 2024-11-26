@@ -23,13 +23,13 @@
       <generate_registers_defines>false</generate_registers_defines>
    </preferences>
    <tools>
-      <pins name="Pins" version="16.0" enabled="true" update_project_code="true">
+      <pins name="Pins" version="16.0" enabled="true" update_project_code="false">
          <generated_project_files>
             <file path="board/pin_mux.c" update_enabled="true"/>
             <file path="board/pin_mux.h" update_enabled="true"/>
          </generated_project_files>
          <pins_profile>
-            <processor_version>16.1.0</processor_version>
+            <processor_version>16.3.0</processor_version>
             <pin_labels>
                <pin_label pin_num="K1" pin_signal="GPIO_EMC_B1_40" label="SEMC_RDY/U14A[C8]" identifier="SEMC_RDY;LPUART6_TXD"/>
                <pin_label pin_num="L1" pin_signal="GPIO_EMC_B1_41" label="SEMC_CSX0/U14A[C6]" identifier="SEMC_CSX0;LPUART6_RXD"/>
@@ -764,12 +764,18 @@
                      <pin_features>
                         <pin_feature name="identifier" value="LPI2C3_SCL"/>
                         <pin_feature name="software_input_on" value="Enable"/>
+                        <pin_feature name="pull_up_down_config" value="no_init"/>
+                        <pin_feature name="pull_keeper_select" value="Pull"/>
+                        <pin_feature name="open_drain" value="Enable"/>
                      </pin_features>
                   </pin>
                   <pin peripheral="LPI2C3" signal="SDA" pin_num="A6" pin_signal="GPIO_DISP_B2_11">
                      <pin_features>
                         <pin_feature name="identifier" value="LPI2C3_SDA"/>
                         <pin_feature name="software_input_on" value="Enable"/>
+                        <pin_feature name="pull_up_down_config" value="no_init"/>
+                        <pin_feature name="pull_keeper_select" value="Pull"/>
+                        <pin_feature name="open_drain" value="Enable"/>
                      </pin_features>
                   </pin>
                   <pin peripheral="LPSPI4" signal="SCK" pin_num="B6" pin_signal="GPIO_DISP_B2_12">
@@ -814,8 +820,20 @@
                         <pin_feature name="identifier" value="LPUART11_RXD"/>
                      </pin_features>
                   </pin>
-                  <pin peripheral="LPI2C5" signal="SCL" pin_num="N8" pin_signal="GPIO_LPSR_05"/>
-                  <pin peripheral="LPI2C5" signal="SDA" pin_num="N7" pin_signal="GPIO_LPSR_04"/>
+                  <pin peripheral="LPI2C5" signal="SCL" pin_num="N8" pin_signal="GPIO_LPSR_05">
+                     <pin_features>
+                        <pin_feature name="software_input_on" value="Enable"/>
+                        <pin_feature name="pull_up_down_config" value="no_init"/>
+                        <pin_feature name="open_drain" value="Enable"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="LPI2C5" signal="SDA" pin_num="N7" pin_signal="GPIO_LPSR_04">
+                     <pin_features>
+                        <pin_feature name="software_input_on" value="Enable"/>
+                        <pin_feature name="pull_up_down_config" value="no_init"/>
+                        <pin_feature name="open_drain" value="Enable"/>
+                     </pin_features>
+                  </pin>
                   <pin peripheral="LPUART6" signal="TXD" pin_num="K1" pin_signal="GPIO_EMC_B1_40">
                      <pin_features>
                         <pin_feature name="identifier" value="LPUART6_TXD"/>
@@ -886,9 +904,12 @@
          </functions_list>
       </pins>
       <clocks name="Clocks" version="14.0" enabled="true" update_project_code="true">
-         <generated_project_files/>
+         <generated_project_files>
+            <file path="board/clock_config.c" update_enabled="true"/>
+            <file path="board/clock_config.h" update_enabled="true"/>
+         </generated_project_files>
          <clocks_profile>
-            <processor_version>16.1.0</processor_version>
+            <processor_version>16.3.0</processor_version>
          </clocks_profile>
          <clock_configurations>
             <clock_configuration name="BOARD_BootClockRUN" id_prefix="" prefix_user_defined="false">
@@ -991,9 +1012,9 @@
                   <clock_output id="ACMP_CLK_ROOT.outFreq" value="24 MHz" locked="false" accuracy=""/>
                   <clock_output id="ADC1_CLK_ROOT.outFreq" value="24 MHz" locked="false" accuracy=""/>
                   <clock_output id="ADC2_CLK_ROOT.outFreq" value="24 MHz" locked="false" accuracy=""/>
-                  <clock_output id="ARM_PLL_CLK.outFreq" value="396 MHz" locked="false" accuracy=""/>
+                  <clock_output id="ARM_PLL_CLK.outFreq" value="960 MHz" locked="false" accuracy=""/>
                   <clock_output id="ASRC_CLK_ROOT.outFreq" value="24 MHz" locked="false" accuracy=""/>
-                  <clock_output id="AXI_CLK_ROOT.outFreq" value="396 MHz" locked="false" accuracy=""/>
+                  <clock_output id="AXI_CLK_ROOT.outFreq" value="960 MHz" locked="false" accuracy=""/>
                   <clock_output id="BUS_CLK_ROOT.outFreq" value="240 MHz" locked="false" accuracy=""/>
                   <clock_output id="BUS_LPSR_CLK_ROOT.outFreq" value="160 MHz" locked="false" accuracy=""/>
                   <clock_output id="CAN1_CLK_ROOT.outFreq" value="24 MHz" locked="false" accuracy=""/>
@@ -1063,7 +1084,7 @@
                   <clock_output id="LPUART9_CLK_ROOT.outFreq" value="24 MHz" locked="false" accuracy=""/>
                   <clock_output id="M4_CLK_ROOT.outFreq" value="240 MHz" locked="false" accuracy=""/>
                   <clock_output id="M4_SYSTICK_CLK_ROOT.outFreq" value="24 MHz" locked="false" accuracy=""/>
-                  <clock_output id="M7_CLK_ROOT.outFreq" value="396 MHz" locked="false" accuracy=""/>
+                  <clock_output id="M7_CLK_ROOT.outFreq" value="960 MHz" locked="false" accuracy=""/>
                   <clock_output id="M7_SYSTICK_CLK_ROOT.outFreq" value="100 kHz" locked="false" accuracy=""/>
                   <clock_output id="MIC_CLK_ROOT.outFreq" value="24 MHz" locked="false" accuracy=""/>
                   <clock_output id="MIPI_DSI_TX_CLK_ESC_ROOT.outFreq" value="24 MHz" locked="false" accuracy=""/>
@@ -1110,9 +1131,9 @@
                   <setting id="SemcConfigurationPatchConfig" value="disabled" locked="false"/>
                   <setting id="ANADIG_OSC_OSC_24M_CTRL_LP_EN_CFG" value="Low" locked="false"/>
                   <setting id="ANADIG_OSC_OSC_24M_CTRL_OSC_EN_CFG" value="Enabled" locked="false"/>
-                  <setting id="ANADIG_PLL.ARM_PLL_POST_DIV.scale" value="4" locked="true"/>
+                  <setting id="ANADIG_PLL.ARM_PLL_POST_DIV.scale" value="2" locked="true"/>
                   <setting id="ANADIG_PLL.ARM_PLL_PREDIV.scale" value="1" locked="true"/>
-                  <setting id="ANADIG_PLL.ARM_PLL_VDIV.scale" value="132" locked="true"/>
+                  <setting id="ANADIG_PLL.ARM_PLL_VDIV.scale" value="160" locked="true"/>
                   <setting id="ANADIG_PLL.PLL_AUDIO_BYPASS.sel" value="ANADIG_OSC.OSC_24M" locked="false"/>
                   <setting id="ANADIG_PLL.PLL_VIDEO.denom" value="960000" locked="false"/>
                   <setting id="ANADIG_PLL.PLL_VIDEO.div" value="41" locked="false"/>
@@ -1162,17 +1183,17 @@
             </clock_configuration>
          </clock_configurations>
       </clocks>
-      <ddr name="DDR" version="1.0" enabled="false" update_project_code="true">
+      <ddr name="DDR" version="" enabled="false" update_project_code="true">
          <generated_project_files/>
          <components/>
       </ddr>
-      <dcdx name="DCDx" version="3.0" enabled="true" update_project_code="true">
+      <dcdx name="DCDx" version="3.0" enabled="true" update_project_code="false">
          <generated_project_files>
             <file path="board/dcd.c" update_enabled="true"/>
             <file path="board/dcd.h" update_enabled="true"/>
          </generated_project_files>
          <dcdx_profile>
-            <processor_version>14.0.1</processor_version>
+            <processor_version>16.3.0</processor_version>
             <output_format>c_array</output_format>
          </dcdx_profile>
          <dcdx_configurations>
@@ -1357,7 +1378,7 @@
             </dcdx_configuration>
          </dcdx_configurations>
       </dcdx>
-      <periphs name="Peripherals" version="15.0" enabled="true" update_project_code="true">
+      <periphs name="Peripherals" version="15.0" enabled="true" update_project_code="false">
          <dependencies>
             <dependency resourceType="SWComponent" resourceId="platform.drivers.lpuart" description="LPUART Driver is not found in the toolchain/IDE project. The project will not compile!" problem_level="2" source="Peripherals">
                <feature name="enabled" evaluation="equal">
@@ -1410,7 +1431,7 @@
             <file path="board/peripherals.h" update_enabled="true"/>
          </generated_project_files>
          <peripherals_profile>
-            <processor_version>16.1.0</processor_version>
+            <processor_version>16.3.0</processor_version>
             <ignored_component_migration_offer/>
          </peripherals_profile>
          <functional_groups>
@@ -1950,11 +1971,11 @@
             <processor_version>N/A</processor_version>
          </tee_profile>
       </tee>
-      <pbl name="PBL" version="1.0" enabled="false" update_project_code="true">
+      <pbl name="PBL" version="" enabled="false" update_project_code="true">
          <generated_project_files/>
          <pbl_configuration/>
       </pbl>
-      <serdes name="SERDES" version="1.0" enabled="false" update_project_code="true">
+      <serdes name="SERDES" version="" enabled="false" update_project_code="true">
          <generated_project_files/>
          <components/>
       </serdes>
