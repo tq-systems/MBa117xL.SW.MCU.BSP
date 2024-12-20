@@ -6,7 +6,6 @@ stages:
 
 import_sdk_and_compile:
   tags:
-    - docker
     - tqmaxx
   stage: build
   before_script:
