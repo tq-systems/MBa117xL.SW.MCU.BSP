@@ -10,7 +10,7 @@ product: Pins v16.0
 processor: MIMXRT1176xxxxx
 package_id: MIMXRT1176DVMAA
 mcu_data: ksdk2_0
-processor_version: 16.1.0
+processor_version: 16.3.0
 board: MIMXRT1170-EVK
 pin_labels:
 - {pin_num: K1, pin_signal: GPIO_EMC_B1_40, label: 'SEMC_RDY/U14A[C8]', identifier: SEMC_RDY;LPUART6_TXD}
@@ -256,8 +256,10 @@ BOARD_InitPins:
   - {pin_num: D6, peripheral: ENET_QOS, signal: 'enet_rdata, 01', pin_signal: GPIO_DISP_B2_07, identifier: ENET_QOS_RXD1}
   - {pin_num: B5, peripheral: ENET_QOS, signal: enet_rx_en, pin_signal: GPIO_DISP_B2_08, identifier: ENET_QOS_RX_EN}
   - {pin_num: D8, peripheral: GPIO11, signal: 'gpio_io, 10', pin_signal: GPIO_DISP_B2_09, identifier: BT_PD, direction: OUTPUT, software_input_on: Enable, slew_rate: Fast}
-  - {pin_num: D9, peripheral: LPI2C3, signal: SCL, pin_signal: GPIO_DISP_B2_10, identifier: LPI2C3_SCL, software_input_on: Enable}
-  - {pin_num: A6, peripheral: LPI2C3, signal: SDA, pin_signal: GPIO_DISP_B2_11, identifier: LPI2C3_SDA, software_input_on: Enable}
+  - {pin_num: D9, peripheral: LPI2C3, signal: SCL, pin_signal: GPIO_DISP_B2_10, identifier: LPI2C3_SCL, software_input_on: Enable, pull_up_down_config: no_init, pull_keeper_select: Pull,
+    open_drain: Enable}
+  - {pin_num: A6, peripheral: LPI2C3, signal: SDA, pin_signal: GPIO_DISP_B2_11, identifier: LPI2C3_SDA, software_input_on: Enable, pull_up_down_config: no_init, pull_keeper_select: Pull,
+    open_drain: Enable}
   - {pin_num: B6, peripheral: LPSPI4, signal: SCK, pin_signal: GPIO_DISP_B2_12, identifier: LPSPI4_SCK, direction: OUTPUT, pull_keeper_select: Keeper}
   - {pin_num: A5, peripheral: LPSPI4, signal: SIN, pin_signal: GPIO_DISP_B2_13, identifier: LPSPI4_SIN, direction: INPUT, pull_keeper_select: Keeper}
   - {pin_num: A7, peripheral: LPSPI4, signal: SOUT, pin_signal: GPIO_DISP_B2_14, direction: OUTPUT, pull_keeper_select: Keeper}
@@ -266,8 +268,8 @@ BOARD_InitPins:
   - {pin_num: T7, peripheral: GPIO12, signal: 'gpio_io, 03', pin_signal: GPIO_LPSR_03}
   - {pin_num: U8, peripheral: LPUART11, signal: TXD, pin_signal: GPIO_LPSR_08, identifier: LPUART11_TXD}
   - {pin_num: P5, peripheral: LPUART11, signal: RXD, pin_signal: GPIO_LPSR_09, identifier: LPUART11_RXD}
-  - {pin_num: N8, peripheral: LPI2C5, signal: SCL, pin_signal: GPIO_LPSR_05}
-  - {pin_num: N7, peripheral: LPI2C5, signal: SDA, pin_signal: GPIO_LPSR_04}
+  - {pin_num: N8, peripheral: LPI2C5, signal: SCL, pin_signal: GPIO_LPSR_05, software_input_on: Enable, pull_up_down_config: no_init, open_drain: Enable}
+  - {pin_num: N7, peripheral: LPI2C5, signal: SDA, pin_signal: GPIO_LPSR_04, software_input_on: Enable, pull_up_down_config: no_init, open_drain: Enable}
   - {pin_num: K1, peripheral: LPUART6, signal: TXD, pin_signal: GPIO_EMC_B1_40, identifier: LPUART6_TXD, pull_down_pull_up_config: Pull_Up}
   - {pin_num: L1, peripheral: LPUART6, signal: RXD, pin_signal: GPIO_EMC_B1_41, identifier: LPUART6_RXD, pull_down_pull_up_config: Pull_Up}
   - {pin_num: U6, peripheral: JTAG, signal: MOD, pin_signal: GPIO_LPSR_13}
@@ -824,10 +826,10 @@ void BOARD_InitPins(void) {
       0U);                                    /* Software Input On Field: Input Path is determined by functionality */
   IOMUXC_SetPinMux(
       IOMUXC_GPIO_LPSR_04_LPI2C5_SDA,         /* GPIO_LPSR_04 is configured as LPI2C5_SDA */
-      0U);                                    /* Software Input On Field: Input Path is determined by functionality */
+      1U);                                    /* Software Input On Field: Force input path of pad GPIO_LPSR_04 */
   IOMUXC_SetPinMux(
       IOMUXC_GPIO_LPSR_05_LPI2C5_SCL,         /* GPIO_LPSR_05 is configured as LPI2C5_SCL */
-      0U);                                    /* Software Input On Field: Input Path is determined by functionality */
+      1U);                                    /* Software Input On Field: Force input path of pad GPIO_LPSR_05 */
   IOMUXC_SetPinMux(
       IOMUXC_GPIO_LPSR_06_LPI2C6_SDA,         /* GPIO_LPSR_06 is configured as LPI2C6_SDA */
       1U);                                    /* Software Input On Field: Force input path of pad GPIO_LPSR_06 */
@@ -944,6 +946,24 @@ void BOARD_InitPins(void) {
                                                  Pull / Keep Select Field: Pull Enable
                                                  Pull Up / Down Config. Field: Weak pull down
                                                  Open Drain Field: Disabled
+                                                 Domain write protection: Both cores are allowed
+                                                 Domain write protection lock: Neither of DWP bits is locked */
+  IOMUXC_SetPinConfig(
+      IOMUXC_GPIO_DISP_B2_10_LPI2C3_SCL,      /* GPIO_DISP_B2_10 PAD functional properties : */
+      0x16U);                                 /* Slew Rate Field: Slow Slew Rate
+                                                 Drive Strength Field: high drive strength
+                                                 Pull / Keep Select Field: Pull Enable
+                                                 Pull Up / Down Config. Field: Weak pull down
+                                                 Open Drain Field: Enabled
+                                                 Domain write protection: Both cores are allowed
+                                                 Domain write protection lock: Neither of DWP bits is locked */
+  IOMUXC_SetPinConfig(
+      IOMUXC_GPIO_DISP_B2_11_LPI2C3_SDA,      /* GPIO_DISP_B2_11 PAD functional properties : */
+      0x16U);                                 /* Slew Rate Field: Slow Slew Rate
+                                                 Drive Strength Field: high drive strength
+                                                 Pull / Keep Select Field: Pull Enable
+                                                 Pull Up / Down Config. Field: Weak pull down
+                                                 Open Drain Field: Enabled
                                                  Domain write protection: Both cores are allowed
                                                  Domain write protection lock: Neither of DWP bits is locked */
   IOMUXC_SetPinConfig(
@@ -1148,6 +1168,24 @@ void BOARD_InitPins(void) {
       0x0CU);                                 /* PDRV Field: high drive strength
                                                  Pull Down Pull Up Field: No Pull
                                                  Open Drain Field: Disabled
+                                                 Domain write protection: Both cores are allowed
+                                                 Domain write protection lock: Neither of DWP bits is locked */
+  IOMUXC_SetPinConfig(
+      IOMUXC_GPIO_LPSR_04_LPI2C5_SDA,         /* GPIO_LPSR_04 PAD functional properties : */
+      0x22U);                                 /* Slew Rate Field: Slow Slew Rate
+                                                 Drive Strength Field: high driver
+                                                 Pull Select Field: Pull Disable
+                                                 Pull Up / Down Config. Field: Weak pull down
+                                                 Open Drain LPSR Field: Enabled
+                                                 Domain write protection: Both cores are allowed
+                                                 Domain write protection lock: Neither of DWP bits is locked */
+  IOMUXC_SetPinConfig(
+      IOMUXC_GPIO_LPSR_05_LPI2C5_SCL,         /* GPIO_LPSR_05 PAD functional properties : */
+      0x22U);                                 /* Slew Rate Field: Slow Slew Rate
+                                                 Drive Strength Field: high driver
+                                                 Pull Select Field: Pull Disable
+                                                 Pull Up / Down Config. Field: Weak pull down
+                                                 Open Drain LPSR Field: Enabled
                                                  Domain write protection: Both cores are allowed
                                                  Domain write protection lock: Neither of DWP bits is locked */
   IOMUXC_SetPinConfig(
