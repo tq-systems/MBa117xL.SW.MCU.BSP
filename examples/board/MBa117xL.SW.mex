@@ -23,7 +23,7 @@
       <generate_registers_defines>false</generate_registers_defines>
    </preferences>
    <tools>
-      <pins name="Pins" version="16.0" enabled="true" update_project_code="false">
+      <pins name="Pins" version="16.0" enabled="true" update_project_code="true">
          <generated_project_files>
             <file path="board/pin_mux.c" update_enabled="true"/>
             <file path="board/pin_mux.h" update_enabled="true"/>
@@ -628,26 +628,6 @@
                         <pin_feature name="pull_down_pull_up_config" value="No_Pull"/>
                      </pin_features>
                   </pin>
-                  <pin peripheral="GPIO10" signal="gpio_io, 16" pin_num="G14" pin_signal="GPIO_SD_B2_07">
-                     <pin_features>
-                        <pin_feature name="identifier" value="DIG_IN_1"/>
-                     </pin_features>
-                  </pin>
-                  <pin peripheral="GPIO10" signal="gpio_io, 17" pin_num="F15" pin_signal="GPIO_SD_B2_08">
-                     <pin_features>
-                        <pin_feature name="identifier" value="DIG_IN_2"/>
-                     </pin_features>
-                  </pin>
-                  <pin peripheral="GPIO10" signal="gpio_io, 18" pin_num="H15" pin_signal="GPIO_SD_B2_09">
-                     <pin_features>
-                        <pin_feature name="identifier" value="DIG_IN_3"/>
-                     </pin_features>
-                  </pin>
-                  <pin peripheral="GPIO10" signal="gpio_io, 19" pin_num="H14" pin_signal="GPIO_SD_B2_10">
-                     <pin_features>
-                        <pin_feature name="identifier" value="DIG_IN_4"/>
-                     </pin_features>
-                  </pin>
                   <pin peripheral="GPIO10" signal="gpio_io, 20" pin_num="F16" pin_signal="GPIO_SD_B2_11">
                      <pin_features>
                         <pin_feature name="identifier" value="RESET_ETH"/>
@@ -680,21 +660,6 @@
                   <pin peripheral="GPIO9" signal="gpio_io, 28" pin_num="M17" pin_signal="GPIO_AD_29">
                      <pin_features>
                         <pin_feature name="identifier" value="WLAN_PD"/>
-                     </pin_features>
-                  </pin>
-                  <pin peripheral="GPIO10" signal="gpio_io, 21" pin_num="E13" pin_signal="GPIO_DISP_B1_00">
-                     <pin_features>
-                        <pin_feature name="identifier" value="IRQ_PE"/>
-                     </pin_features>
-                  </pin>
-                  <pin peripheral="GPIO10" signal="gpio_io, 23" pin_num="D11" pin_signal="GPIO_DISP_B1_02">
-                     <pin_features>
-                        <pin_feature name="identifier" value="DSI_CTP_IRQ"/>
-                     </pin_features>
-                  </pin>
-                  <pin peripheral="GPIO10" signal="gpio_io, 24" pin_num="E11" pin_signal="GPIO_DISP_B1_03">
-                     <pin_features>
-                        <pin_feature name="identifier" value="ADC_INT"/>
                      </pin_features>
                   </pin>
                   <pin peripheral="GPIO10" signal="gpio_io, 29" pin_num="A15" pin_signal="GPIO_DISP_B1_08">
@@ -899,6 +864,64 @@
                   <pin peripheral="DSI_HOST" signal="CLKN" pin_num="A9" pin_signal="MIPI_DSI_CKN"/>
                   <pin peripheral="DSI_HOST" signal="DP, 0" pin_num="B8" pin_signal="MIPI_DSI_DP0"/>
                   <pin peripheral="DSI_HOST" signal="DN, 0" pin_num="A8" pin_signal="MIPI_DSI_DN0"/>
+                  <pin peripheral="GPIO4" signal="gpio_mux_io, 23" pin_num="D11" pin_signal="GPIO_DISP_B1_02">
+                     <pin_features>
+                        <pin_feature name="identifier" value="DSI_CTP_IRQ"/>
+                        <pin_feature name="direction" value="INPUT"/>
+                        <pin_feature name="gpio_interrupt" value="kGPIO_IntRisingEdge"/>
+                        <pin_feature name="pull_down_pull_up_config" value="Pull_Down"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="GPIO4" signal="gpio_mux_io, 24" pin_num="E11" pin_signal="GPIO_DISP_B1_03">
+                     <pin_features>
+                        <pin_feature name="identifier" value="ADC_INT"/>
+                        <pin_feature name="direction" value="INPUT"/>
+                        <pin_feature name="gpio_interrupt" value="kGPIO_IntFallingEdge"/>
+                        <pin_feature name="pull_down_pull_up_config" value="Pull_Up"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="GPIO4" signal="gpio_mux_io, 21" pin_num="E13" pin_signal="GPIO_DISP_B1_00">
+                     <pin_features>
+                        <pin_feature name="identifier" value="IRQ_PE"/>
+                        <pin_feature name="direction" value="INPUT"/>
+                        <pin_feature name="gpio_interrupt" value="kGPIO_IntFallingEdge"/>
+                        <pin_feature name="pull_down_pull_up_config" value="No_Pull"/>
+                        <pin_feature name="open_drain" value="Disable"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="GPIO4" signal="gpio_mux_io, 16" pin_num="G14" pin_signal="GPIO_SD_B2_07">
+                     <pin_features>
+                        <pin_feature name="identifier" value="DIG_IN_1"/>
+                        <pin_feature name="direction" value="INPUT"/>
+                        <pin_feature name="gpio_interrupt" value="no_init"/>
+                        <pin_feature name="software_input_on" value="Disable"/>
+                        <pin_feature name="pull_down_pull_up_config" value="No_Pull"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="GPIO4" signal="gpio_mux_io, 19" pin_num="H14" pin_signal="GPIO_SD_B2_10">
+                     <pin_features>
+                        <pin_feature name="identifier" value="DIG_IN_4"/>
+                        <pin_feature name="direction" value="INPUT"/>
+                        <pin_feature name="gpio_interrupt" value="no_init"/>
+                        <pin_feature name="pull_down_pull_up_config" value="No_Pull"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="GPIO4" signal="gpio_mux_io, 17" pin_num="F15" pin_signal="GPIO_SD_B2_08">
+                     <pin_features>
+                        <pin_feature name="identifier" value="DIG_IN_2"/>
+                        <pin_feature name="direction" value="INPUT"/>
+                        <pin_feature name="gpio_interrupt" value="no_init"/>
+                        <pin_feature name="pull_down_pull_up_config" value="No_Pull"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="GPIO4" signal="gpio_mux_io, 18" pin_num="H15" pin_signal="GPIO_SD_B2_09">
+                     <pin_features>
+                        <pin_feature name="identifier" value="DIG_IN_3"/>
+                        <pin_feature name="direction" value="INPUT"/>
+                        <pin_feature name="gpio_interrupt" value="no_init"/>
+                        <pin_feature name="pull_down_pull_up_config" value="No_Pull"/>
+                     </pin_features>
+                  </pin>
                </pins>
             </function>
          </functions_list>
