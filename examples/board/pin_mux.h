@@ -631,50 +631,6 @@ void BOARD_InitBootPins(void);
 #define BOARD_INITPINS_ENET_1G_TXD3_SIGNAL                            enet_tdata   /*!< Signal name */
 #define BOARD_INITPINS_ENET_1G_TXD3_CHANNEL                                   3U   /*!< Signal channel */
 
-/* GPIO_SD_B2_07 (coord G14), FlexSPI_A_CLK/U23[6]/U21[B2] */
-/* Routed pin properties */
-#define BOARD_INITPINS_DIG_IN_1_PERIPHERAL                                GPIO10   /*!< Peripheral name */
-#define BOARD_INITPINS_DIG_IN_1_SIGNAL                                   gpio_io   /*!< Signal name */
-#define BOARD_INITPINS_DIG_IN_1_CHANNEL                                      16U   /*!< Signal channel */
-
-/* Symbols to be used with GPIO driver */
-#define BOARD_INITPINS_DIG_IN_1_GPIO                                      GPIO10   /*!< GPIO peripheral base pointer */
-#define BOARD_INITPINS_DIG_IN_1_GPIO_PIN                                     16U   /*!< GPIO pin number */
-#define BOARD_INITPINS_DIG_IN_1_GPIO_PIN_MASK                        (1U << 16U)   /*!< GPIO pin mask */
-
-/* GPIO_SD_B2_08 (coord F15), FlexSPI_A_D0/U23[5]/U21[D3] */
-/* Routed pin properties */
-#define BOARD_INITPINS_DIG_IN_2_PERIPHERAL                                GPIO10   /*!< Peripheral name */
-#define BOARD_INITPINS_DIG_IN_2_SIGNAL                                   gpio_io   /*!< Signal name */
-#define BOARD_INITPINS_DIG_IN_2_CHANNEL                                      17U   /*!< Signal channel */
-
-/* Symbols to be used with GPIO driver */
-#define BOARD_INITPINS_DIG_IN_2_GPIO                                      GPIO10   /*!< GPIO peripheral base pointer */
-#define BOARD_INITPINS_DIG_IN_2_GPIO_PIN                                     17U   /*!< GPIO pin number */
-#define BOARD_INITPINS_DIG_IN_2_GPIO_PIN_MASK                        (1U << 17U)   /*!< GPIO pin mask */
-
-/* GPIO_SD_B2_09 (coord H15), FlexSPI_A_D1/U23[2]/U21[D2] */
-/* Routed pin properties */
-#define BOARD_INITPINS_DIG_IN_3_PERIPHERAL                                GPIO10   /*!< Peripheral name */
-#define BOARD_INITPINS_DIG_IN_3_SIGNAL                                   gpio_io   /*!< Signal name */
-#define BOARD_INITPINS_DIG_IN_3_CHANNEL                                      18U   /*!< Signal channel */
-
-/* Symbols to be used with GPIO driver */
-#define BOARD_INITPINS_DIG_IN_3_GPIO                                      GPIO10   /*!< GPIO peripheral base pointer */
-#define BOARD_INITPINS_DIG_IN_3_GPIO_PIN                                     18U   /*!< GPIO pin number */
-#define BOARD_INITPINS_DIG_IN_3_GPIO_PIN_MASK                        (1U << 18U)   /*!< GPIO pin mask */
-
-/* GPIO_SD_B2_10 (coord H14), FlexSPI_A_D2/U23[3]/U21[C4] */
-/* Routed pin properties */
-#define BOARD_INITPINS_DIG_IN_4_PERIPHERAL                                GPIO10   /*!< Peripheral name */
-#define BOARD_INITPINS_DIG_IN_4_SIGNAL                                   gpio_io   /*!< Signal name */
-#define BOARD_INITPINS_DIG_IN_4_CHANNEL                                      19U   /*!< Signal channel */
-
-/* Symbols to be used with GPIO driver */
-#define BOARD_INITPINS_DIG_IN_4_GPIO                                      GPIO10   /*!< GPIO peripheral base pointer */
-#define BOARD_INITPINS_DIG_IN_4_GPIO_PIN                                     19U   /*!< GPIO pin number */
-#define BOARD_INITPINS_DIG_IN_4_GPIO_PIN_MASK                        (1U << 19U)   /*!< GPIO pin mask */
-
 /* GPIO_SD_B2_11 (coord F16), FlexSPI_A_D3/U23[7]/U21[D4] */
 /* Routed pin properties */
 #define BOARD_INITPINS_RESET_ETH_PERIPHERAL                               GPIO10   /*!< Peripheral name */
@@ -729,39 +685,6 @@ void BOARD_InitBootPins(void);
 #define BOARD_INITPINS_WLAN_PD_GPIO                                        GPIO9   /*!< GPIO peripheral base pointer */
 #define BOARD_INITPINS_WLAN_PD_GPIO_PIN                                      28U   /*!< GPIO pin number */
 #define BOARD_INITPINS_WLAN_PD_GPIO_PIN_MASK                         (1U << 28U)   /*!< GPIO pin mask */
-
-/* GPIO_DISP_B1_00 (coord E13), ENET_RGMII_RX_EN/U10[26] */
-/* Routed pin properties */
-#define BOARD_INITPINS_IRQ_PE_PERIPHERAL                                  GPIO10   /*!< Peripheral name */
-#define BOARD_INITPINS_IRQ_PE_SIGNAL                                     gpio_io   /*!< Signal name */
-#define BOARD_INITPINS_IRQ_PE_CHANNEL                                        21U   /*!< Signal channel */
-
-/* Symbols to be used with GPIO driver */
-#define BOARD_INITPINS_IRQ_PE_GPIO                                        GPIO10   /*!< GPIO peripheral base pointer */
-#define BOARD_INITPINS_IRQ_PE_GPIO_PIN                                       21U   /*!< GPIO pin number */
-#define BOARD_INITPINS_IRQ_PE_GPIO_PIN_MASK                          (1U << 21U)   /*!< GPIO pin mask */
-
-/* GPIO_DISP_B1_02 (coord D11), ENET_RGMII_RXD0/U10[25] */
-/* Routed pin properties */
-#define BOARD_INITPINS_DSI_CTP_IRQ_PERIPHERAL                             GPIO10   /*!< Peripheral name */
-#define BOARD_INITPINS_DSI_CTP_IRQ_SIGNAL                                gpio_io   /*!< Signal name */
-#define BOARD_INITPINS_DSI_CTP_IRQ_CHANNEL                                   23U   /*!< Signal channel */
-
-/* Symbols to be used with GPIO driver */
-#define BOARD_INITPINS_DSI_CTP_IRQ_GPIO                                   GPIO10   /*!< GPIO peripheral base pointer */
-#define BOARD_INITPINS_DSI_CTP_IRQ_GPIO_PIN                                  23U   /*!< GPIO pin number */
-#define BOARD_INITPINS_DSI_CTP_IRQ_GPIO_PIN_MASK                     (1U << 23U)   /*!< GPIO pin mask */
-
-/* GPIO_DISP_B1_03 (coord E11), ENET_RGMII_RXD1/U10[24] */
-/* Routed pin properties */
-#define BOARD_INITPINS_ADC_INT_PERIPHERAL                                 GPIO10   /*!< Peripheral name */
-#define BOARD_INITPINS_ADC_INT_SIGNAL                                    gpio_io   /*!< Signal name */
-#define BOARD_INITPINS_ADC_INT_CHANNEL                                       24U   /*!< Signal channel */
-
-/* Symbols to be used with GPIO driver */
-#define BOARD_INITPINS_ADC_INT_GPIO                                       GPIO10   /*!< GPIO peripheral base pointer */
-#define BOARD_INITPINS_ADC_INT_GPIO_PIN                                      24U   /*!< GPIO pin number */
-#define BOARD_INITPINS_ADC_INT_GPIO_PIN_MASK                         (1U << 24U)   /*!< GPIO pin mask */
 
 /* GPIO_DISP_B1_08 (coord A15), ENET_RGMII_TXD1/U10[17]/BT_CFG[2] */
 /* Routed pin properties */
@@ -1042,6 +965,83 @@ void BOARD_InitBootPins(void);
 #define BOARD_INITPINS_MIPI_DSI_DN0_PERIPHERAL                          DSI_HOST   /*!< Peripheral name */
 #define BOARD_INITPINS_MIPI_DSI_DN0_SIGNAL                                    DN   /*!< Signal name */
 #define BOARD_INITPINS_MIPI_DSI_DN0_CHANNEL                                   0U   /*!< Signal channel */
+
+/* GPIO_DISP_B1_02 (coord D11), ENET_RGMII_RXD0/U10[25] */
+/* Routed pin properties */
+#define BOARD_INITPINS_DSI_CTP_IRQ_PERIPHERAL                              GPIO4   /*!< Peripheral name */
+#define BOARD_INITPINS_DSI_CTP_IRQ_SIGNAL                            gpio_mux_io   /*!< Signal name */
+#define BOARD_INITPINS_DSI_CTP_IRQ_CHANNEL                                   23U   /*!< Signal channel */
+
+/* Symbols to be used with GPIO driver */
+#define BOARD_INITPINS_DSI_CTP_IRQ_GPIO                                    GPIO4   /*!< GPIO peripheral base pointer */
+#define BOARD_INITPINS_DSI_CTP_IRQ_GPIO_PIN                                  23U   /*!< GPIO pin number */
+#define BOARD_INITPINS_DSI_CTP_IRQ_GPIO_PIN_MASK                     (1U << 23U)   /*!< GPIO pin mask */
+
+/* GPIO_DISP_B1_03 (coord E11), ENET_RGMII_RXD1/U10[24] */
+/* Routed pin properties */
+#define BOARD_INITPINS_ADC_INT_PERIPHERAL                                  GPIO4   /*!< Peripheral name */
+#define BOARD_INITPINS_ADC_INT_SIGNAL                                gpio_mux_io   /*!< Signal name */
+#define BOARD_INITPINS_ADC_INT_CHANNEL                                       24U   /*!< Signal channel */
+
+/* Symbols to be used with GPIO driver */
+#define BOARD_INITPINS_ADC_INT_GPIO                                        GPIO4   /*!< GPIO peripheral base pointer */
+#define BOARD_INITPINS_ADC_INT_GPIO_PIN                                      24U   /*!< GPIO pin number */
+#define BOARD_INITPINS_ADC_INT_GPIO_PIN_MASK                         (1U << 24U)   /*!< GPIO pin mask */
+
+/* GPIO_DISP_B1_00 (coord E13), ENET_RGMII_RX_EN/U10[26] */
+/* Routed pin properties */
+#define BOARD_INITPINS_IRQ_PE_PERIPHERAL                                   GPIO4   /*!< Peripheral name */
+#define BOARD_INITPINS_IRQ_PE_SIGNAL                                 gpio_mux_io   /*!< Signal name */
+#define BOARD_INITPINS_IRQ_PE_CHANNEL                                        21U   /*!< Signal channel */
+
+/* Symbols to be used with GPIO driver */
+#define BOARD_INITPINS_IRQ_PE_GPIO                                         GPIO4   /*!< GPIO peripheral base pointer */
+#define BOARD_INITPINS_IRQ_PE_GPIO_PIN                                       21U   /*!< GPIO pin number */
+#define BOARD_INITPINS_IRQ_PE_GPIO_PIN_MASK                          (1U << 21U)   /*!< GPIO pin mask */
+
+/* GPIO_SD_B2_07 (coord G14), FlexSPI_A_CLK/U23[6]/U21[B2] */
+/* Routed pin properties */
+#define BOARD_INITPINS_DIG_IN_1_PERIPHERAL                                 GPIO4   /*!< Peripheral name */
+#define BOARD_INITPINS_DIG_IN_1_SIGNAL                               gpio_mux_io   /*!< Signal name */
+#define BOARD_INITPINS_DIG_IN_1_CHANNEL                                      16U   /*!< Signal channel */
+
+/* Symbols to be used with GPIO driver */
+#define BOARD_INITPINS_DIG_IN_1_GPIO                                       GPIO4   /*!< GPIO peripheral base pointer */
+#define BOARD_INITPINS_DIG_IN_1_GPIO_PIN                                     16U   /*!< GPIO pin number */
+#define BOARD_INITPINS_DIG_IN_1_GPIO_PIN_MASK                        (1U << 16U)   /*!< GPIO pin mask */
+
+/* GPIO_SD_B2_10 (coord H14), FlexSPI_A_D2/U23[3]/U21[C4] */
+/* Routed pin properties */
+#define BOARD_INITPINS_DIG_IN_4_PERIPHERAL                                 GPIO4   /*!< Peripheral name */
+#define BOARD_INITPINS_DIG_IN_4_SIGNAL                               gpio_mux_io   /*!< Signal name */
+#define BOARD_INITPINS_DIG_IN_4_CHANNEL                                      19U   /*!< Signal channel */
+
+/* Symbols to be used with GPIO driver */
+#define BOARD_INITPINS_DIG_IN_4_GPIO                                       GPIO4   /*!< GPIO peripheral base pointer */
+#define BOARD_INITPINS_DIG_IN_4_GPIO_PIN                                     19U   /*!< GPIO pin number */
+#define BOARD_INITPINS_DIG_IN_4_GPIO_PIN_MASK                        (1U << 19U)   /*!< GPIO pin mask */
+
+/* GPIO_SD_B2_08 (coord F15), FlexSPI_A_D0/U23[5]/U21[D3] */
+/* Routed pin properties */
+#define BOARD_INITPINS_DIG_IN_2_PERIPHERAL                                 GPIO4   /*!< Peripheral name */
+#define BOARD_INITPINS_DIG_IN_2_SIGNAL                               gpio_mux_io   /*!< Signal name */
+#define BOARD_INITPINS_DIG_IN_2_CHANNEL                                      17U   /*!< Signal channel */
+
+/* Symbols to be used with GPIO driver */
+#define BOARD_INITPINS_DIG_IN_2_GPIO                                       GPIO4   /*!< GPIO peripheral base pointer */
+#define BOARD_INITPINS_DIG_IN_2_GPIO_PIN                                     17U   /*!< GPIO pin number */
+#define BOARD_INITPINS_DIG_IN_2_GPIO_PIN_MASK                        (1U << 17U)   /*!< GPIO pin mask */
+
+/* GPIO_SD_B2_09 (coord H15), FlexSPI_A_D1/U23[2]/U21[D2] */
+/* Routed pin properties */
+#define BOARD_INITPINS_DIG_IN_3_PERIPHERAL                                 GPIO4   /*!< Peripheral name */
+#define BOARD_INITPINS_DIG_IN_3_SIGNAL                               gpio_mux_io   /*!< Signal name */
+#define BOARD_INITPINS_DIG_IN_3_CHANNEL                                      18U   /*!< Signal channel */
+
+/* Symbols to be used with GPIO driver */
+#define BOARD_INITPINS_DIG_IN_3_GPIO                                       GPIO4   /*!< GPIO peripheral base pointer */
+#define BOARD_INITPINS_DIG_IN_3_GPIO_PIN                                     18U   /*!< GPIO pin number */
+#define BOARD_INITPINS_DIG_IN_3_GPIO_PIN_MASK                        (1U << 18U)   /*!< GPIO pin mask */
 
 /*!
  * @brief Configures pin routing and optionally pin electrical features.

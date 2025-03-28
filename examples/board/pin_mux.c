@@ -230,10 +230,6 @@ BOARD_InitPins:
   - {pin_num: E15, peripheral: USDHC2, signal: 'usdhc_data, 0', pin_signal: GPIO_SD_B2_03, identifier: SDHC2_DATA0}
   - {pin_num: F14, peripheral: USDHC2, signal: usdhc_clk, pin_signal: GPIO_SD_B2_04, identifier: SDHC2_CLK}
   - {pin_num: F17, peripheral: ENET_1G, signal: 'enet_tdata, 03', pin_signal: GPIO_SD_B2_06, identifier: ENET_1G_TXD3, pull_down_pull_up_config: No_Pull}
-  - {pin_num: G14, peripheral: GPIO10, signal: 'gpio_io, 16', pin_signal: GPIO_SD_B2_07, identifier: DIG_IN_1}
-  - {pin_num: F15, peripheral: GPIO10, signal: 'gpio_io, 17', pin_signal: GPIO_SD_B2_08, identifier: DIG_IN_2}
-  - {pin_num: H15, peripheral: GPIO10, signal: 'gpio_io, 18', pin_signal: GPIO_SD_B2_09, identifier: DIG_IN_3}
-  - {pin_num: H14, peripheral: GPIO10, signal: 'gpio_io, 19', pin_signal: GPIO_SD_B2_10, identifier: DIG_IN_4}
   - {pin_num: F16, peripheral: GPIO10, signal: 'gpio_io, 20', pin_signal: GPIO_SD_B2_11, identifier: RESET_ETH, direction: OUTPUT, pull_down_pull_up_config: No_Pull}
   - {pin_num: M14, peripheral: GPIO9, signal: 'gpio_io, 14', pin_signal: GPIO_AD_15, identifier: DSI_LPTE}
   - {pin_num: N17, peripheral: ENET_1G, signal: enet_mdc, pin_signal: GPIO_AD_16, identifier: ENET_1G_MDC, pull_keeper_select: Keeper}
@@ -241,9 +237,6 @@ BOARD_InitPins:
   - {pin_num: L17, peripheral: PWM2, signal: 'A, 2', pin_signal: GPIO_AD_28, identifier: PWM2_A2}
   - {pin_num: N16, peripheral: ENET_QOS, signal: enet_mdio, pin_signal: GPIO_AD_27, identifier: ENET_QOS_MDIO}
   - {pin_num: M17, peripheral: GPIO9, signal: 'gpio_io, 28', pin_signal: GPIO_AD_29, identifier: WLAN_PD}
-  - {pin_num: E13, peripheral: GPIO10, signal: 'gpio_io, 21', pin_signal: GPIO_DISP_B1_00, identifier: IRQ_PE}
-  - {pin_num: D11, peripheral: GPIO10, signal: 'gpio_io, 23', pin_signal: GPIO_DISP_B1_02, identifier: DSI_CTP_IRQ}
-  - {pin_num: E11, peripheral: GPIO10, signal: 'gpio_io, 24', pin_signal: GPIO_DISP_B1_03, identifier: ADC_INT}
   - {pin_num: A15, peripheral: GPIO10, signal: 'gpio_io, 29', pin_signal: GPIO_DISP_B1_08, identifier: BOOTCFG_2}
   - {pin_num: C13, peripheral: GPIO10, signal: 'gpio_io, 30', pin_signal: GPIO_DISP_B1_09, identifier: BOOTCFG_3}
   - {pin_num: B14, peripheral: GPIO10, signal: 'gpio_io, 31', pin_signal: GPIO_DISP_B1_10, identifier: BOOTCFG_4}
@@ -296,6 +289,17 @@ BOARD_InitPins:
   - {pin_num: A9, peripheral: DSI_HOST, signal: CLKN, pin_signal: MIPI_DSI_CKN}
   - {pin_num: B8, peripheral: DSI_HOST, signal: 'DP, 0', pin_signal: MIPI_DSI_DP0}
   - {pin_num: A8, peripheral: DSI_HOST, signal: 'DN, 0', pin_signal: MIPI_DSI_DN0}
+  - {pin_num: D11, peripheral: GPIO4, signal: 'gpio_mux_io, 23', pin_signal: GPIO_DISP_B1_02, identifier: DSI_CTP_IRQ, direction: INPUT, gpio_interrupt: kGPIO_IntRisingEdge,
+    pull_down_pull_up_config: Pull_Down}
+  - {pin_num: E11, peripheral: GPIO4, signal: 'gpio_mux_io, 24', pin_signal: GPIO_DISP_B1_03, identifier: ADC_INT, direction: INPUT, gpio_interrupt: kGPIO_IntFallingEdge,
+    pull_down_pull_up_config: Pull_Up}
+  - {pin_num: E13, peripheral: GPIO4, signal: 'gpio_mux_io, 21', pin_signal: GPIO_DISP_B1_00, identifier: IRQ_PE, direction: INPUT, gpio_interrupt: kGPIO_IntFallingEdge,
+    pull_down_pull_up_config: No_Pull, open_drain: Disable}
+  - {pin_num: G14, peripheral: GPIO4, signal: 'gpio_mux_io, 16', pin_signal: GPIO_SD_B2_07, identifier: DIG_IN_1, direction: INPUT, gpio_interrupt: no_init, software_input_on: Disable,
+    pull_down_pull_up_config: No_Pull}
+  - {pin_num: H14, peripheral: GPIO4, signal: 'gpio_mux_io, 19', pin_signal: GPIO_SD_B2_10, identifier: DIG_IN_4, direction: INPUT, gpio_interrupt: no_init, pull_down_pull_up_config: No_Pull}
+  - {pin_num: F15, peripheral: GPIO4, signal: 'gpio_mux_io, 17', pin_signal: GPIO_SD_B2_08, identifier: DIG_IN_2, direction: INPUT, gpio_interrupt: no_init, pull_down_pull_up_config: No_Pull}
+  - {pin_num: H15, peripheral: GPIO4, signal: 'gpio_mux_io, 18', pin_signal: GPIO_SD_B2_09, identifier: DIG_IN_3, direction: INPUT, gpio_interrupt: no_init, pull_down_pull_up_config: No_Pull}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 
@@ -317,6 +321,75 @@ void BOARD_InitPins(void) {
   };
   /* Initialize GPIO functionality on GPIO_AD_32 (pin K16) */
   GPIO_PinInit(CM7_GPIO3, 31U, &SDHC1_CD_N_config);
+
+  /* GPIO configuration of DIG_IN_1 on GPIO_SD_B2_07 (pin G14) */
+  gpio_pin_config_t DIG_IN_1_config = {
+      .direction = kGPIO_DigitalInput,
+      .outputLogic = 0U,
+      .interruptMode = kGPIO_NoIntmode
+  };
+  /* Initialize GPIO functionality on GPIO_SD_B2_07 (pin G14) */
+  GPIO_PinInit(GPIO4, 16U, &DIG_IN_1_config);
+
+  /* GPIO configuration of DIG_IN_2 on GPIO_SD_B2_08 (pin F15) */
+  gpio_pin_config_t DIG_IN_2_config = {
+      .direction = kGPIO_DigitalInput,
+      .outputLogic = 0U,
+      .interruptMode = kGPIO_NoIntmode
+  };
+  /* Initialize GPIO functionality on GPIO_SD_B2_08 (pin F15) */
+  GPIO_PinInit(GPIO4, 17U, &DIG_IN_2_config);
+
+  /* GPIO configuration of DIG_IN_3 on GPIO_SD_B2_09 (pin H15) */
+  gpio_pin_config_t DIG_IN_3_config = {
+      .direction = kGPIO_DigitalInput,
+      .outputLogic = 0U,
+      .interruptMode = kGPIO_NoIntmode
+  };
+  /* Initialize GPIO functionality on GPIO_SD_B2_09 (pin H15) */
+  GPIO_PinInit(GPIO4, 18U, &DIG_IN_3_config);
+
+  /* GPIO configuration of DIG_IN_4 on GPIO_SD_B2_10 (pin H14) */
+  gpio_pin_config_t DIG_IN_4_config = {
+      .direction = kGPIO_DigitalInput,
+      .outputLogic = 0U,
+      .interruptMode = kGPIO_NoIntmode
+  };
+  /* Initialize GPIO functionality on GPIO_SD_B2_10 (pin H14) */
+  GPIO_PinInit(GPIO4, 19U, &DIG_IN_4_config);
+
+  /* GPIO configuration of IRQ_PE on GPIO_DISP_B1_00 (pin E13) */
+  gpio_pin_config_t IRQ_PE_config = {
+      .direction = kGPIO_DigitalInput,
+      .outputLogic = 0U,
+      .interruptMode = kGPIO_IntFallingEdge
+  };
+  /* Initialize GPIO functionality on GPIO_DISP_B1_00 (pin E13) */
+  GPIO_PinInit(GPIO4, 21U, &IRQ_PE_config);
+  /* Enable GPIO pin interrupt on GPIO_DISP_B1_00 (pin E13) */
+  GPIO_PortEnableInterrupts(GPIO4, 1U << 21U);
+
+  /* GPIO configuration of DSI_CTP_IRQ on GPIO_DISP_B1_02 (pin D11) */
+  gpio_pin_config_t DSI_CTP_IRQ_config = {
+      .direction = kGPIO_DigitalInput,
+      .outputLogic = 0U,
+      .interruptMode = kGPIO_IntRisingEdge
+  };
+  /* Initialize GPIO functionality on GPIO_DISP_B1_02 (pin D11) */
+  GPIO_PinInit(GPIO4, 23U, &DSI_CTP_IRQ_config);
+  /* Enable GPIO pin interrupt on GPIO_DISP_B1_02 (pin D11) */
+  GPIO_PortEnableInterrupts(GPIO4, 1U << 23U);
+
+  /* GPIO configuration of ADC_INT on GPIO_DISP_B1_03 (pin E11) */
+  gpio_pin_config_t ADC_INT_config = {
+      .direction = kGPIO_DigitalInput,
+      .outputLogic = 0U,
+      .interruptMode = kGPIO_IntFallingEdge
+  };
+  /* Initialize GPIO functionality on GPIO_DISP_B1_03 (pin E11) */
+  GPIO_PinInit(GPIO4, 24U, &ADC_INT_config);
+  /* Enable GPIO pin interrupt on GPIO_DISP_B1_03 (pin E11) */
+  GPIO_PortEnableInterrupts(GPIO4, 1U << 24U);
 
   /* GPIO configuration of USER_LED_1 on GPIO_EMC_B2_09 (pin N2) */
   gpio_pin_config_t USER_LED_1_config = {
@@ -487,16 +560,16 @@ void BOARD_InitPins(void) {
       IOMUXC_GPIO_AD_35_GPIO10_IO02,          /* GPIO_AD_35 is configured as GPIO10_IO02 */
       0U);                                    /* Software Input On Field: Input Path is determined by functionality */
   IOMUXC_SetPinMux(
-      IOMUXC_GPIO_DISP_B1_00_GPIO10_IO21,     /* GPIO_DISP_B1_00 is configured as GPIO10_IO21 */
+      IOMUXC_GPIO_DISP_B1_00_GPIO_MUX4_IO21,  /* GPIO_DISP_B1_00 is configured as GPIO_MUX4_IO21 */
       0U);                                    /* Software Input On Field: Input Path is determined by functionality */
   IOMUXC_SetPinMux(
       IOMUXC_GPIO_DISP_B1_01_ENET_QOS_RX_CLK,  /* GPIO_DISP_B1_01 is configured as ENET_QOS_RX_CLK */
       0U);                                    /* Software Input On Field: Input Path is determined by functionality */
   IOMUXC_SetPinMux(
-      IOMUXC_GPIO_DISP_B1_02_GPIO10_IO23,     /* GPIO_DISP_B1_02 is configured as GPIO10_IO23 */
+      IOMUXC_GPIO_DISP_B1_02_GPIO_MUX4_IO23,  /* GPIO_DISP_B1_02 is configured as GPIO_MUX4_IO23 */
       0U);                                    /* Software Input On Field: Input Path is determined by functionality */
   IOMUXC_SetPinMux(
-      IOMUXC_GPIO_DISP_B1_03_GPIO10_IO24,     /* GPIO_DISP_B1_03 is configured as GPIO10_IO24 */
+      IOMUXC_GPIO_DISP_B1_03_GPIO_MUX4_IO24,  /* GPIO_DISP_B1_03 is configured as GPIO_MUX4_IO24 */
       0U);                                    /* Software Input On Field: Input Path is determined by functionality */
   IOMUXC_SetPinMux(
       IOMUXC_GPIO_DISP_B1_04_ENET_QOS_RX_DATA02,  /* GPIO_DISP_B1_04 is configured as ENET_QOS_RX_DATA02 */
@@ -790,16 +863,16 @@ void BOARD_InitPins(void) {
       IOMUXC_GPIO_SD_B2_06_ENET_1G_TX_DATA03,  /* GPIO_SD_B2_06 is configured as ENET_1G_TX_DATA03 */
       0U);                                    /* Software Input On Field: Input Path is determined by functionality */
   IOMUXC_SetPinMux(
-      IOMUXC_GPIO_SD_B2_07_GPIO10_IO16,       /* GPIO_SD_B2_07 is configured as GPIO10_IO16 */
+      IOMUXC_GPIO_SD_B2_07_GPIO_MUX4_IO16,    /* GPIO_SD_B2_07 is configured as GPIO_MUX4_IO16 */
       0U);                                    /* Software Input On Field: Input Path is determined by functionality */
   IOMUXC_SetPinMux(
-      IOMUXC_GPIO_SD_B2_08_GPIO10_IO17,       /* GPIO_SD_B2_08 is configured as GPIO10_IO17 */
+      IOMUXC_GPIO_SD_B2_08_GPIO_MUX4_IO17,    /* GPIO_SD_B2_08 is configured as GPIO_MUX4_IO17 */
       0U);                                    /* Software Input On Field: Input Path is determined by functionality */
   IOMUXC_SetPinMux(
-      IOMUXC_GPIO_SD_B2_09_GPIO10_IO18,       /* GPIO_SD_B2_09 is configured as GPIO10_IO18 */
+      IOMUXC_GPIO_SD_B2_09_GPIO_MUX4_IO18,    /* GPIO_SD_B2_09 is configured as GPIO_MUX4_IO18 */
       0U);                                    /* Software Input On Field: Input Path is determined by functionality */
   IOMUXC_SetPinMux(
-      IOMUXC_GPIO_SD_B2_10_GPIO10_IO19,       /* GPIO_SD_B2_10 is configured as GPIO10_IO19 */
+      IOMUXC_GPIO_SD_B2_10_GPIO_MUX4_IO19,    /* GPIO_SD_B2_10 is configured as GPIO_MUX4_IO19 */
       0U);                                    /* Software Input On Field: Input Path is determined by functionality */
   IOMUXC_SetPinMux(
       IOMUXC_GPIO_SD_B2_11_GPIO10_IO20,       /* GPIO_SD_B2_11 is configured as GPIO10_IO20 */
@@ -930,6 +1003,27 @@ void BOARD_InitPins(void) {
                                                  Pull / Keep Select Field: Pull Enable
                                                  Pull Up / Down Config. Field: Weak pull up
                                                  Open Drain Field: Enabled
+                                                 Domain write protection: Both cores are allowed
+                                                 Domain write protection lock: Neither of DWP bits is locked */
+  IOMUXC_SetPinConfig(
+      IOMUXC_GPIO_DISP_B1_00_GPIO_MUX4_IO21,  /* GPIO_DISP_B1_00 PAD functional properties : */
+      0x0CU);                                 /* PDRV Field: high drive strength
+                                                 Pull Down Pull Up Field: No Pull
+                                                 Open Drain Field: Disabled
+                                                 Domain write protection: Both cores are allowed
+                                                 Domain write protection lock: Neither of DWP bits is locked */
+  IOMUXC_SetPinConfig(
+      IOMUXC_GPIO_DISP_B1_02_GPIO_MUX4_IO23,  /* GPIO_DISP_B1_02 PAD functional properties : */
+      0x08U);                                 /* PDRV Field: high drive strength
+                                                 Pull Down Pull Up Field: Internal pulldown resistor enabled
+                                                 Open Drain Field: Disabled
+                                                 Domain write protection: Both cores are allowed
+                                                 Domain write protection lock: Neither of DWP bits is locked */
+  IOMUXC_SetPinConfig(
+      IOMUXC_GPIO_DISP_B1_03_GPIO_MUX4_IO24,  /* GPIO_DISP_B1_03 PAD functional properties : */
+      0x04U);                                 /* PDRV Field: high drive strength
+                                                 Pull Down Pull Up Field: Internal pullup resistor enabled
+                                                 Open Drain Field: Disabled
                                                  Domain write protection: Both cores are allowed
                                                  Domain write protection lock: Neither of DWP bits is locked */
   IOMUXC_SetPinConfig(
@@ -1158,6 +1252,34 @@ void BOARD_InitPins(void) {
                                                  Domain write protection lock: Neither of DWP bits is locked */
   IOMUXC_SetPinConfig(
       IOMUXC_GPIO_SD_B2_06_ENET_1G_TX_DATA03,  /* GPIO_SD_B2_06 PAD functional properties : */
+      0x0CU);                                 /* PDRV Field: high drive strength
+                                                 Pull Down Pull Up Field: No Pull
+                                                 Open Drain Field: Disabled
+                                                 Domain write protection: Both cores are allowed
+                                                 Domain write protection lock: Neither of DWP bits is locked */
+  IOMUXC_SetPinConfig(
+      IOMUXC_GPIO_SD_B2_07_GPIO_MUX4_IO16,    /* GPIO_SD_B2_07 PAD functional properties : */
+      0x0CU);                                 /* PDRV Field: high drive strength
+                                                 Pull Down Pull Up Field: No Pull
+                                                 Open Drain Field: Disabled
+                                                 Domain write protection: Both cores are allowed
+                                                 Domain write protection lock: Neither of DWP bits is locked */
+  IOMUXC_SetPinConfig(
+      IOMUXC_GPIO_SD_B2_08_GPIO_MUX4_IO17,    /* GPIO_SD_B2_08 PAD functional properties : */
+      0x0CU);                                 /* PDRV Field: high drive strength
+                                                 Pull Down Pull Up Field: No Pull
+                                                 Open Drain Field: Disabled
+                                                 Domain write protection: Both cores are allowed
+                                                 Domain write protection lock: Neither of DWP bits is locked */
+  IOMUXC_SetPinConfig(
+      IOMUXC_GPIO_SD_B2_09_GPIO_MUX4_IO18,    /* GPIO_SD_B2_09 PAD functional properties : */
+      0x0CU);                                 /* PDRV Field: high drive strength
+                                                 Pull Down Pull Up Field: No Pull
+                                                 Open Drain Field: Disabled
+                                                 Domain write protection: Both cores are allowed
+                                                 Domain write protection lock: Neither of DWP bits is locked */
+  IOMUXC_SetPinConfig(
+      IOMUXC_GPIO_SD_B2_10_GPIO_MUX4_IO19,    /* GPIO_SD_B2_10 PAD functional properties : */
       0x0CU);                                 /* PDRV Field: high drive strength
                                                  Pull Down Pull Up Field: No Pull
                                                  Open Drain Field: Disabled
