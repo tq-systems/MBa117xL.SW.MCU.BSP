@@ -29,3 +29,15 @@ First release.
 ### Fixed
 
 * Port Expander: had issues while setting the output.
+
+## [MBa117xL.SW.MCU.BSP.0003] - 2025-28-03
+
+### Changed
+
+* Route GPIO10 to GPIO4. Update .mex-file.
+* M7 Frequency to 960 MHz.
+
+### Added
+
+* LVDS-display examples.
+* OCRAM in Linker-script.
