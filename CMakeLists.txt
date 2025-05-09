@@ -39,7 +39,7 @@ if(${CMAKE_HOST_SYSTEM_NAME} STREQUAL "Windows")
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         COMMAND_ERROR_IS_FATAL LAST
     )
-elseif(${CMAKE_HOST_SYSTEM_NAME} STREQUAL "Linux")
+elseif(${CMAKE_HOST_SYSTEM_NAME} STREQUAL "Linux" OR ${CMAKE_HOST_SYSTEM_NAME} STREQUAL "Darwin")
     execute_process(
         COMMAND bash -c "${CMAKE_SOURCE_DIR}/scripts/generate_version.sh"
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
