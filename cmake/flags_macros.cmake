@@ -120,7 +120,7 @@ macro(USE_TQ_LPI2C)
     ${CMAKE_C_FLAGS} \
     -DUSE_LPI2C\ ")
     set(CMAKE_CXX_FLAGS " \
-    ${CMAKE_C_FLAGS} \
+    ${CMAKE_CXX_FLAGS} \
     -DUSE_LPI2C\ ")
 endmacro()
 
@@ -129,6 +129,6 @@ macro(USE_TQ_I2C)
     ${CMAKE_C_FLAGS} \
     -DUSE_I2C\ ")
     set(CMAKE_CXX_FLAGS " \
-    ${CMAKE_C_FLAGS} \
+    ${CMAKE_CXX_FLAGS} \
     -DUSE_I2C \ ")
 endmacro()
