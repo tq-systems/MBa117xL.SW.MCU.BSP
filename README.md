@@ -34,6 +34,11 @@ __NOTE__: The versions provided are the ones with which the build system and its
   - Cortex-Debug (from marus25): v1.12.0^
     - ID: `marus25.cortex-debug`
 
+## Platform Note
+
+The project is tested and supported on Windows and Linux only. Mac support is prepared, but not tested nor maintained. Seek additional
+information [from NXP](https://github.com/nxp-mcuxpresso/mcux-sdk?tab=readme-ov-file#supported-development-tools-and-systems) if required.
+
 ### Preparation
 
 * Python3 installation (needed for the west repo tool and helper scripts).
